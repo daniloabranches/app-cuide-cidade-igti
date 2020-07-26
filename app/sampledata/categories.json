@@ -1,0 +1,20 @@
+{
+  "comment": "Sample data categories",
+  "data": [
+    {
+      "title": "Iluminação pública"
+    },
+    {
+      "title": "Árvore"
+    },
+    {
+      "title": "Coleta"
+    },
+    {
+      "title": "Pavimentação"
+    },
+    {
+      "title": "Semáforo"
+    }
+  ]
+}
