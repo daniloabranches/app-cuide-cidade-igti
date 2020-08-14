@@ -19,6 +19,7 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //TODO Rever esse XML e separar estilos semelhantes
         return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 

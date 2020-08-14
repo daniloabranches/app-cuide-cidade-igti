@@ -11,9 +11,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
@@ -24,11 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:textStyle="bold"
         android:ellipsize="end"
         android:singleLine="true"
         android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@id/txt_description_issue"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/txt_date_issue"
         app:layout_constraintStart_toEndOf="@+id/img_issue"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,9 +39,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@id/txt_date_issue"
         app:layout_constraintStart_toEndOf="@+id/img_issue"
         app:layout_constraintTop_toBottomOf="@id/txt_category_issue"
         tools:text="@tools:sample/lorem/random" />
@@ -55,12 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/img_issue"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:text="@sample/issues.json/data/date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
