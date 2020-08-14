@@ -1,0 +1,25 @@
+{
+  "comment": "Sample data categories",
+  "data": [
+    {
+      "category": "Iluminação pública",
+      "date": "10/10/2020"
+    },
+    {
+      "category": "Árvore",
+      "date": "02/08/2020"
+    },
+    {
+      "category": "Coleta",
+      "date": "15/08/2020"
+    },
+    {
+      "category": "Pavimentação",
+      "date": "06/06/2020"
+    },
+    {
+      "category": "Semáforo",
+      "date": "02/08/2020"
+    }
+  ]
+}
