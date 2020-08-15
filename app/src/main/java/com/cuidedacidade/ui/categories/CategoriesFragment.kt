@@ -29,18 +29,16 @@ class CategoriesFragment : Fragment() {
         //TODO Corrigir change do titulo da activity
         activity?.title = "Abrir solicitação"
 
+        list_categories.apply {
+            setHasFixedSize(true)
+        }
+
+        //TODO FloatingActionButton nao deve aparecer nesse fragment, mas deve ser reexibido depois
+        activity?.fab?.hide()
+
         viewModel.getCategories()
             .observe(viewLifecycleOwner, Observer<List<Category>> { categories ->
-
-                //TODO FloatingActionButton nao deve aparecer nesse fragment, mas deve ser reexibido depois
-                activity?.fab?.hide()
-
-                list_categories.apply {
-                    //TODO Jogar para fora do apply
-                    setHasFixedSize(true)
-                    adapter =
-                        CategoriesAdapter(categories)
-                }
+                list_categories.adapter = CategoriesAdapter(categories)
             })
     }
 }

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Cuide da Cidade</string>
     <string name="choose_category">Escolha uma categoria</string>
-    <string name="my_issues">Minhas solicitações</string>
+    <string name="pending_requests">Solicitações pendentes</string>
 </resources>
