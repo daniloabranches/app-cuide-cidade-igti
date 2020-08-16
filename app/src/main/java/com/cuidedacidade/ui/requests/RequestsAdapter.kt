@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.R
+import com.cuidedacidade.domain.entity.Request
 import kotlinx.android.synthetic.main.item_request.view.*
 
 class RequestsAdapter(private val requests: List<Request>) :
@@ -29,7 +30,7 @@ class RequestsAdapter(private val requests: List<Request>) :
             txt_date_request.text = "15 de ago"
 
             //TODO Aqui deve usar o Glide
-            img_request.setBackgroundResource(Integer.parseInt(request.image))
+            //img_request.setBackgroundResource(Integer.parseInt(request.image))
         }
     }
 

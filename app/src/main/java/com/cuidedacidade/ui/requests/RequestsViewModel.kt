@@ -3,10 +3,16 @@ package com.cuidedacidade.ui.requests
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cuidedacidade.R
-import java.util.*
+import com.cuidedacidade.data.repository.RequestDataRepository
+import com.cuidedacidade.domain.entity.Request
+import com.cuidedacidade.domain.usecase.GetPendingRequestsUseCase
+import com.cuidedacidade.log.Log
+import com.cuidedacidade.rx.AppSchedulerProvider
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class RequestsViewModel : ViewModel() {
+    private val compositeDisposable = CompositeDisposable()
+
     private val requests: MutableLiveData<List<Request>> by lazy {
         val liveData = MutableLiveData<List<Request>>()
         loadRequests(liveData)
@@ -18,12 +24,33 @@ class RequestsViewModel : ViewModel() {
     }
 
     private fun loadRequests(liveData: MutableLiveData<List<Request>>) {
-        //TODO Criar modulo de dados para buscar esses dados
-        //TODO Remover imagens de drawable
-        liveData.value = listOf(
-            Request("Coleta", "Teste teste teste teste", R.drawable.ic_recycle.toString(), Date()),
-            Request("Iluminação Pública", "Teste teste teste teste", R.drawable.ic_brightness.toString(), Date()),
-            Request("Ônibus", "Teste teste teste teste", R.drawable.ic_schooolbus.toString(), Date())
-        )
+        //TODO Isso deve ser via DI
+        val requestDataRepository = RequestDataRepository()
+        val schedulerProvider = AppSchedulerProvider()
+
+        val getPendingRequestsUseCase = GetPendingRequestsUseCase(requestDataRepository)
+
+        val subscriptionGetPendingRequestsUseCase = getPendingRequestsUseCase()
+            .retry(1)
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe(
+                {
+                    //TODO observeOn vs postValue
+                    ///TODO Tranformar para model de apresentação?
+                    liveData.value = it
+                },
+                {
+                    Log.exception(it)
+                    //TODO O que fazer com a excecao?
+                })
+        compositeDisposable.add(subscriptionGetPendingRequestsUseCase)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        //TODO Isso esta correto?
+        compositeDisposable.clear()
     }
 }

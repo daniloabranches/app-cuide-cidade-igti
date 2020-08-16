@@ -1,4 +1,4 @@
-package com.cuidedacidade.ui.requests
+package com.cuidedacidade.domain.entity
 
 import java.util.*
 
