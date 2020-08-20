@@ -2,4 +2,6 @@
     <string name="app_name">Cuide da Cidade</string>
     <string name="choose_category">Escolha uma categoria</string>
     <string name="pending_requests">Solicitações pendentes</string>
+
+    <string name="generic_error_requests_message">Erro ao buscar as solicitações. Tente novamente mais tarde :(</string>
 </resources>

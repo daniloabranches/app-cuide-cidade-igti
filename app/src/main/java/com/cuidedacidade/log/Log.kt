@@ -1,13 +1,7 @@
 package com.cuidedacidade.log
 
-class Log {
-    companion object {
-        fun exception(exception: Throwable) {
-
-        }
-
-        fun log(message: String) {
-
-        }
+object Log {
+    fun exception(exception: Throwable) {
+        //TODO Gravar log
     }
 }
