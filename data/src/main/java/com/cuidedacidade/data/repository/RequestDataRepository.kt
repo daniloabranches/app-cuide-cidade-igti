@@ -2,6 +2,7 @@ package com.cuidedacidade.data.repository
 
 import com.cuidedacidade.data.entity.RequestEntity
 import com.cuidedacidade.data.exception.FirebaseUnspecifiedException
+import com.cuidedacidade.data.firebase.toObjectsWithId
 import com.cuidedacidade.data.mapper.RequestEntityDataMapper
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.repository.RequestRepository
@@ -25,13 +26,8 @@ class RequestDataRepository(
             Tasks.await(requests)
 
             if (requests.isSuccessful) {
-                requests.result?.let {
-                    val dataRequests = it.map { document ->
-                        val request = document.toObject(RequestEntity::class.java)
-                        request.id = document.id
-                        request
-                    }
-                    requestEntityDataMapper.transform(dataRequests)
+                requests.result?.toObjectsWithId(RequestEntity::class.java)?.let {
+                    requestEntityDataMapper.transform(it)
                 } ?: mutableListOf()
             } else {
                 throw requests.exception ?: FirebaseUnspecifiedException()
