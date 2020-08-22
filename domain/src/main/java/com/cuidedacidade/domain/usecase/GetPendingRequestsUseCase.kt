@@ -5,5 +5,5 @@ import com.cuidedacidade.domain.repository.RequestRepository
 class GetPendingRequestsUseCase(
     private val requestRepository: RequestRepository
 ) {
-    operator fun invoke() = requestRepository.getPendingRequests()
+    operator fun invoke(userId: String) = requestRepository.getPendingRequests(userId)
 }

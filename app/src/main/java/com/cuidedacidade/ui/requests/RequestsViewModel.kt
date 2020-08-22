@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cuidedacidade.arc.Resource
+import com.cuidedacidade.data.mapper.RequestEntityDataMapper
 import com.cuidedacidade.data.repository.RequestDataRepository
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.usecase.GetPendingRequestsUseCase
@@ -26,12 +27,13 @@ class RequestsViewModel : ViewModel() {
 
     private fun loadRequests(liveData: MutableLiveData<Resource<List<Request>>>) {
         //TODO Isso deve ser via DI
-        val requestDataRepository = RequestDataRepository()
+        val requestDataRepository = RequestDataRepository(RequestEntityDataMapper())
         val schedulerProvider = AppSchedulerProvider()
 
         val getPendingRequestsUseCase = GetPendingRequestsUseCase(requestDataRepository)
 
-        val subscriptionGetPendingRequestsUseCase = getPendingRequestsUseCase()
+        //TODO dados de teste
+        val subscriptionGetPendingRequestsUseCase = getPendingRequestsUseCase("teste")
             .retry(1)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
