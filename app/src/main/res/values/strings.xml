@@ -2,6 +2,21 @@
     <string name="app_name">Cuide da Cidade</string>
     <string name="choose_category">Escolha uma categoria</string>
     <string name="pending_requests">Solicitações pendentes</string>
+    <string name="today">Hoje</string>
+    <string name="yesterday">Ontem</string>
+
+    <string name="jan">jan</string>
+    <string name="feb">fev</string>
+    <string name="mar">mar</string>
+    <string name="apr">abr</string>
+    <string name="may">mai</string>
+    <string name="jun">jun</string>
+    <string name="jul">jul</string>
+    <string name="aug">ago</string>
+    <string name="sep">set</string>
+    <string name="oct">out</string>
+    <string name="nov">nov</string>
+    <string name="dec">dez</string>
 
     <string name="generic_error_requests_message">Erro ao buscar as solicitações. Tente novamente mais tarde :(</string>
 </resources>

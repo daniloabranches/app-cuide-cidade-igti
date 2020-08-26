@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -50,9 +51,17 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
+    implementation 'com.firebaseui:firebase-ui-storage:6.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
     implementation project(path: ':domain')
     implementation project(path: ':data')
+
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
     testImplementation 'junit:junit:4.13'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

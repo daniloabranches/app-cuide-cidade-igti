@@ -1,4 +1,4 @@
-package com.cuidedacidade.base
+package com.cuidedacidade
 
 import androidx.multidex.MultiDexApplication
 import com.cuidedacidade.log.Log

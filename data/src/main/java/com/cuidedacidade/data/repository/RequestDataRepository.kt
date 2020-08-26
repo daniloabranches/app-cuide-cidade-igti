@@ -2,7 +2,7 @@ package com.cuidedacidade.data.repository
 
 import com.cuidedacidade.data.entity.RequestEntity
 import com.cuidedacidade.data.exception.FirebaseUnspecifiedException
-import com.cuidedacidade.data.firebase.toObjectsWithId
+import com.cuidedacidade.data.extensions.toObjectsWithId
 import com.cuidedacidade.data.mapper.RequestEntityDataMapper
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.repository.RequestRepository

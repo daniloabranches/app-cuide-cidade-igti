@@ -3,7 +3,7 @@ package com.cuidedacidade.ui.requests
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cuidedacidade.arc.Resource
+import com.cuidedacidade.base.Resource
 import com.cuidedacidade.data.mapper.RequestEntityDataMapper
 import com.cuidedacidade.data.repository.RequestDataRepository
 import com.cuidedacidade.domain.entity.Request

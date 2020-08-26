@@ -1,4 +1,4 @@
-package com.cuidedacidade.data.firebase
+package com.cuidedacidade.data.extensions
 
 import com.google.firebase.firestore.QuerySnapshot
 

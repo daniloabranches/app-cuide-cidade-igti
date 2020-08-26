@@ -1,4 +1,4 @@
-package com.cuidedacidade.arc
+package com.cuidedacidade.base
 
 sealed class Resource<T>(
     val data: T? = null,
