@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.cuidedacidade.R
 import com.cuidedacidade.base.Resource
-import com.cuidedacidade.domain.entity.Request
-import kotlinx.android.synthetic.main.activity_main.*
+import com.cuidedacidade.model.RequestModel
 import kotlinx.android.synthetic.main.fragment_requests.*
 
 class RequestsFragment : Fragment() {
@@ -29,36 +29,40 @@ class RequestsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO Corrigir change do titulo da activity
-        activity?.title = getString(R.string.app_name)
-
-        list_requests.apply {
+        lst_requests.apply {
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
 
-        //TODO FloatingActionButton deve aparecer nesse fragment
-        activity?.fab?.show()
+        activity?.let {
+            swp_requests.setColorSchemeColors(ContextCompat.getColor(it, R.color.colorAccent))
+        }
+
+        swp_requests.setOnRefreshListener(viewModel::refreshRequests)
 
         viewModel.getRequests()
-            .observe(viewLifecycleOwner, Observer<Resource<List<Request>>> { requests ->
+            .observe(viewLifecycleOwner, Observer<Resource<List<RequestModel>>> { requests ->
                 when (requests) {
-                    is Resource.Success -> loadRequests(requests.data)
-                    is Resource.Loading -> showShimmerView()
-                    is Resource.Error -> showMessageError()
+                    is Resource.Loading -> setupUIRefreshing()
+                    is Resource.Success -> setupUI(requests.data)
+                    is Resource.Error -> setupUIWithError()
                 }
             })
     }
 
-    private fun loadRequests(requests: List<Request>?) {
-        list_requests.adapter = requests?.let { RequestsAdapter(it) }
+    private fun setupUI(requests: List<RequestModel>?) {
+        lst_requests.adapter = requests?.let { RequestsAdapter(it) }
+
+        swp_requests.isRefreshing = false
     }
 
-    private fun showShimmerView() {
-        //TODO Shimmer
+    private fun setupUIRefreshing() {
+        swp_requests.isRefreshing = true
     }
 
-    private fun showMessageError() {
+    private fun setupUIWithError() {
         Toast.makeText(activity, R.string.generic_error_requests_message, Toast.LENGTH_SHORT).show()
+
+        swp_requests.isRefreshing = false
     }
 }

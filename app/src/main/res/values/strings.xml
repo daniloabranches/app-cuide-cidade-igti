@@ -4,6 +4,7 @@
     <string name="pending_requests">Solicitações pendentes</string>
     <string name="today">Hoje</string>
     <string name="yesterday">Ontem</string>
+    <string name="categories_fragment_title">Abrir solicitação</string>
 
     <string name="jan">jan</string>
     <string name="feb">fev</string>

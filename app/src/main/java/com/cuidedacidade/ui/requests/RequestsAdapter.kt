@@ -9,15 +9,16 @@ import com.bumptech.glide.Glide
 import com.cuidedacidade.R
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.image.ImageEngine
+import com.cuidedacidade.model.RequestModel
 import com.cuidedacidade.utils.DateUtils
 import kotlinx.android.synthetic.main.item_request.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RequestsAdapter(requests: List<Request>) :
+class RequestsAdapter(requests: List<RequestModel>) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
-    private val requests: List<Request> by lazy {
+    private val requests: List<RequestModel> by lazy {
         requests.sortedByDescending { it.date }
     }
 

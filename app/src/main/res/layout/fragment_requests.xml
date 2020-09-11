@@ -14,21 +14,28 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/pending_requests"
-        app:layout_constraintBottom_toTopOf="@id/list_requests"
+        app:layout_constraintBottom_toTopOf="@id/swp_requests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_requests"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swp_requests"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_title_pending_requests"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_request" />
+        app:layout_constraintTop_toBottomOf="@id/txt_title_pending_requests">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lst_requests"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_request" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

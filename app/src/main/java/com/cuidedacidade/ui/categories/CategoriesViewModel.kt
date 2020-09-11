@@ -3,7 +3,6 @@ package com.cuidedacidade.ui.categories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cuidedacidade.R
 
 class CategoriesViewModel : ViewModel() {
 
@@ -19,17 +18,15 @@ class CategoriesViewModel : ViewModel() {
     }
 
     private fun loadCategories(): List<Category> {
-        //TODO Criar modulo de dados para buscar esses dados
-        //TODO Remover imagens de drawable
         return listOf(
-            Category("Coleta", R.drawable.ic_recycle.toString()),
-            Category("Iluminação Pública", R.drawable.ic_brightness.toString()),
-            Category("Ônibus", R.drawable.ic_schooolbus.toString()),
-            Category("Pavimentação", R.drawable.ic_tractor.toString()),
-            Category("Segurança", R.drawable.ic_security.toString()),
-            Category("Semáforo", R.drawable.ic_traffic.toString()),
-            Category("Táxi", R.drawable.ic_taxi.toString()),
-            Category("Telefones", R.drawable.ic_phone.toString())
+            Category("Coleta", "ic_recycle.png"),
+            Category("Iluminação Pública", "ic_brightness.png"),
+            Category("Ônibus", "ic_schooolbus.png"),
+            Category("Pavimentação", "ic_tractor.png"),
+            Category("Segurança", "ic_security.png"),
+            Category("Semáforo", "ic_traffic.png"),
+            Category("Táxi", "ic_taxi.png"),
+            Category("Telefones", "ic_phone.png")
         )
     }
 }

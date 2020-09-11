@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cuidedacidade.R
+import com.cuidedacidade.image.ImageEngine
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoriesAdapter(private val categories: List<Category>) :
@@ -26,8 +28,9 @@ class CategoriesAdapter(private val categories: List<Category>) :
             val category = categories[position]
             txt_title_category.text = category.title
 
-            //TODO Aqui deve usar o Glide
-            img_category.setBackgroundResource(Integer.parseInt(category.image))
+            val reference =
+                ImageEngine.getCategoriesStorageReference(resources).child(category.image)
+            Glide.with(this).load(reference).into(img_category)
         }
     }
 

@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/RequestsFragment"
         android:name="com.cuidedacidade.ui.requests.RequestsFragment"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_requests">
 
         <action
@@ -17,6 +18,7 @@
     <fragment
         android:id="@+id/CategoriesFragment"
         android:name="com.cuidedacidade.ui.categories.CategoriesFragment"
+        android:label="@string/categories_fragment_title"
         tools:layout="@layout/fragment_categories">
 
         <action
