@@ -1,5 +1,6 @@
 package com.cuidedacidade.ui.requests
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,27 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.base.Resource
 import com.cuidedacidade.model.RequestModel
 import kotlinx.android.synthetic.main.fragment_requests.*
+import javax.inject.Inject
 
 class RequestsFragment : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel: RequestsViewModel by viewModels()
+    private val viewModel by viewModels<RequestsViewModel> { viewModelFactory }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as CCidadeApplication).appComponent
+            .requestsComponent().create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

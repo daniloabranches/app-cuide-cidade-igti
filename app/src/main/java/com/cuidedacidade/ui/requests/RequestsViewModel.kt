@@ -4,23 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cuidedacidade.base.Resource
-import com.cuidedacidade.data.mapper.RequestEntityDataMapper
-import com.cuidedacidade.data.repository.RequestDataRepository
 import com.cuidedacidade.domain.usecase.GetPendingRequestsUseCase
 import com.cuidedacidade.log.Log
 import com.cuidedacidade.mapper.RequestModelDataMapper
 import com.cuidedacidade.model.RequestModel
-import com.cuidedacidade.rx.AppSchedulerProvider
+import com.cuidedacidade.rx.SchedulerProvider
 import com.cuidedacidade.security.Auth
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class RequestsViewModel : ViewModel() {
-    //TODO DI
-    private val requestDataRepository = RequestDataRepository(RequestEntityDataMapper())
-    private val schedulerProvider = AppSchedulerProvider()
-    private val requestModelDataMapper = RequestModelDataMapper()
-    private val getPendingRequestsUseCase = GetPendingRequestsUseCase(requestDataRepository)
-
+class RequestsViewModel @Inject constructor(
+    private val schedulerProvider: SchedulerProvider,
+    private val requestModelDataMapper: RequestModelDataMapper,
+    private val getPendingRequestsUseCase: GetPendingRequestsUseCase
+) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     private val requests: MutableLiveData<Resource<List<RequestModel>>> by lazy {

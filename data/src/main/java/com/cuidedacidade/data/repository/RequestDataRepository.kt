@@ -8,8 +8,9 @@ import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.repository.RequestRepository
 import com.google.android.gms.tasks.Tasks
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class RequestDataRepository(
+class RequestDataRepository @Inject constructor(
     private val requestEntityDataMapper: RequestEntityDataMapper
 ) : BaseRepository(), RequestRepository {
 
