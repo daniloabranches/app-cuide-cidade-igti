@@ -16,22 +16,24 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class RequestsModule {
-    //TODO
-
     @Binds
     @IntoMap
     @ViewModelKey(RequestsViewModel::class)
     abstract fun bindViewModel(viewModel: RequestsViewModel): ViewModel
 
+    //TODO Correto?
     @Binds
-    abstract fun bindRequestModelDataMapper(requestModelDataMapper: RequestModelDataMapper): ModelDataMapper
+    abstract fun bindModelDataMapper(requestModelDataMapper: RequestModelDataMapper): ModelDataMapper
 
+    //TODO Correto?
     @Binds
-    abstract fun bindRequestEntityDataMapper(requestEntityDataMapper: RequestEntityDataMapper): EntityDataMapper
+    abstract fun bindEntityDataMapper(requestEntityDataMapper: RequestEntityDataMapper): EntityDataMapper
 
+    //TODO Correto?
     @Binds
-    abstract fun bindRequestDataRepository(requestDataRepository: RequestDataRepository): RequestRepository
+    abstract fun bindRequestRepository(requestDataRepository: RequestDataRepository): RequestRepository
 
+    //TODO Correto?
     @Binds
-    abstract fun bindGetPendingRequestsUseCase(getPendingRequestsUseCase: GetPendingRequestsUseCase): UseCase
+    abstract fun bindUseCase(getPendingRequestsUseCase: GetPendingRequestsUseCase): UseCase
 }

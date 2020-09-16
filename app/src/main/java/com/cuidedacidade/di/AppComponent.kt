@@ -3,6 +3,7 @@ package com.cuidedacidade.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
@@ -10,7 +11,7 @@ import javax.inject.Singleton
     modules = [
         AppModuleBinds::class,
         ViewModelBuilderModule::class,
-        SubComponentsModule::class
+        SubcomponentsModule::class
     ]
 )
 interface AppComponent {
@@ -21,3 +22,8 @@ interface AppComponent {
 
     fun requestsComponent(): RequestsComponent.Factory
 }
+
+@Module(
+    subcomponents = [RequestsComponent::class]
+)
+object SubcomponentsModule

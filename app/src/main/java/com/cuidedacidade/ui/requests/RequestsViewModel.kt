@@ -15,7 +15,9 @@ import javax.inject.Inject
 
 class RequestsViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
+    //TODO como isso deve ser fornecido?
     private val requestModelDataMapper: RequestModelDataMapper,
+    //TODO como isso deve ser fornecido?
     private val getPendingRequestsUseCase: GetPendingRequestsUseCase
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

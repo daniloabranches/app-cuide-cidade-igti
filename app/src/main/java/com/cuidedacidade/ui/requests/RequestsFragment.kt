@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_requests.*
 import javax.inject.Inject
 
 class RequestsFragment : Fragment() {
+    //TODO Como isso é fornecido?
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

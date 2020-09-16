@@ -4,6 +4,8 @@ import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.model.RequestModel
 import javax.inject.Inject
 
+interface ModelDataMapper
+
 class RequestModelDataMapper @Inject constructor() : ModelDataMapper,
     io.reactivex.rxjava3.functions.Function<List<Request>, List<RequestModel>> {
 
