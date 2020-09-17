@@ -3,7 +3,7 @@ package com.cuidedacidade.ui.requests
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cuidedacidade.base.Resource
+import com.cuidedacidade.core.flow.Resource
 import com.cuidedacidade.domain.usecase.GetPendingRequestsUseCase
 import com.cuidedacidade.log.Log
 import com.cuidedacidade.mapper.RequestModelDataMapper
@@ -15,9 +15,7 @@ import javax.inject.Inject
 
 class RequestsViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
-    //TODO como isso deve ser fornecido?
     private val requestModelDataMapper: RequestModelDataMapper,
-    //TODO como isso deve ser fornecido?
     private val getPendingRequestsUseCase: GetPendingRequestsUseCase
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

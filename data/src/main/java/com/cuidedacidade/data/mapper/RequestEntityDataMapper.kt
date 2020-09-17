@@ -4,9 +4,7 @@ import com.cuidedacidade.data.entity.RequestEntity
 import com.cuidedacidade.domain.entity.Request
 import javax.inject.Inject
 
-interface EntityDataMapper
-
-class RequestEntityDataMapper @Inject constructor() : EntityDataMapper {
+class RequestEntityDataMapper @Inject constructor() {
     fun transform(dataRequests: List<RequestEntity>) =
         dataRequests.map {
             transform(it)

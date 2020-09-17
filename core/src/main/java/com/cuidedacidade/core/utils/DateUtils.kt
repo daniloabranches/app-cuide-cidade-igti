@@ -1,4 +1,4 @@
-package com.cuidedacidade.utils
+package com.cuidedacidade.core.utils
 
 import java.util.*
 

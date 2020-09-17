@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.cuidedacidade.R
-import com.cuidedacidade.domain.entity.Request
+import com.cuidedacidade.core.utils.DateUtils
 import com.cuidedacidade.image.ImageEngine
 import com.cuidedacidade.model.RequestModel
-import com.cuidedacidade.utils.DateUtils
 import kotlinx.android.synthetic.main.item_request.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RequestsAdapter(requests: List<RequestModel>) :
+class RequestsAdapter(requests: List<RequestModel>, private val imageEngine: ImageEngine) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
     private val requests: List<RequestModel> by lazy {
@@ -42,9 +40,7 @@ class RequestsAdapter(requests: List<RequestModel>) :
             txt_description_request.text = request.description
             txt_date_request.text = extractFormattedDate(context, request.date)
 
-            val reference =
-                ImageEngine.getCategoriesStorageReference(resources).child(request.image)
-            Glide.with(this).load(reference).into(img_request)
+            imageEngine.getCategoryImage(request.image, img_request)
         }
     }
 

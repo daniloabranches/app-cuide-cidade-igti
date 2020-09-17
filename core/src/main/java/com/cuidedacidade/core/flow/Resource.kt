@@ -1,4 +1,4 @@
-package com.cuidedacidade.base
+package com.cuidedacidade.core.flow
 
 sealed class Resource<T>(
     val data: T? = null,

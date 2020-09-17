@@ -14,7 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
-import com.cuidedacidade.base.Resource
+import com.cuidedacidade.core.flow.Resource
+import com.cuidedacidade.image.ImageEngine
 import com.cuidedacidade.model.RequestModel
 import kotlinx.android.synthetic.main.fragment_requests.*
 import javax.inject.Inject
@@ -65,7 +66,7 @@ class RequestsFragment : Fragment() {
     }
 
     private fun setupUI(requests: List<RequestModel>?) {
-        lst_requests.adapter = requests?.let { RequestsAdapter(it) }
+        lst_requests.adapter = requests?.let { RequestsAdapter(it, ImageEngine) }
 
         swp_requests.isRefreshing = false
     }

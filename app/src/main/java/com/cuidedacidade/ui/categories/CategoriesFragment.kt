@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.cuidedacidade.R
+import com.cuidedacidade.image.ImageEngine
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragment : Fragment() {
@@ -32,7 +33,7 @@ class CategoriesFragment : Fragment() {
 
         viewModel.getCategories()
             .observe(viewLifecycleOwner, Observer<List<Category>> { categories ->
-                list_categories.adapter = CategoriesAdapter(categories)
+                list_categories.adapter = CategoriesAdapter(categories, ImageEngine)
             })
     }
 }

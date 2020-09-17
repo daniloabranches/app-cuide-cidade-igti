@@ -1,4 +1,4 @@
-package com.cuidedacidade.extensions
+package com.cuidedacidade.core.extensions
 
 import android.util.DisplayMetrics
 

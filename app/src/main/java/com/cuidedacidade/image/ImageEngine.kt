@@ -1,7 +1,9 @@
 package com.cuidedacidade.image
 
 import android.content.res.Resources
-import com.cuidedacidade.extensions.getDensityQualifier
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.cuidedacidade.core.extensions.getDensityQualifier
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -12,6 +14,12 @@ object ImageEngine {
         return storage.child("${imagePath}/${densityQualifier}")
     }
 
-    fun getCategoriesStorageReference(resources: Resources) =
+    private fun getCategoriesStorageReference(resources: Resources) =
         getStorageReference(resources, "categories")
+
+    fun getCategoryImage(imagePath: String, imageView: ImageView) {
+        val reference =
+            getCategoriesStorageReference(imageView.resources).child(imagePath)
+        Glide.with(imageView).load(reference).into(imageView)
+    }
 }
