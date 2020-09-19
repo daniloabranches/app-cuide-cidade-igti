@@ -14,15 +14,23 @@
         <action
             android:id="@+id/action_RequestsFragment_to_CategoriesFragment"
             app:destination="@id/CategoriesFragment" />
+        <action
+            android:id="@+id/action_RequestsFragment_to_AllRequestsFragment"
+            app:destination="@id/AllRequestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/CategoriesFragment"
         android:name="com.cuidedacidade.ui.categories.CategoriesFragment"
         android:label="@string/categories_fragment_title"
-        tools:layout="@layout/fragment_categories">
+        tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/AllRequestsFragment"
+        android:name="com.cuidedacidade.ui.requests.AllRequestsFragment"
+        android:label="@string/requests"
+        tools:layout="@layout/fragment_requests">
 
         <action
-            android:id="@+id/action_CategoriesFragment_to_RequestsFragment"
-            app:destination="@id/RequestsFragment" />
+            android:id="@+id/action_AllRequestsFragment_to_CategoriesFragment"
+            app:destination="@id/CategoriesFragment" />
     </fragment>
 </navigation>

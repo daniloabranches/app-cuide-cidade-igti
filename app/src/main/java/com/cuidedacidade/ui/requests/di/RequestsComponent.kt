@@ -1,9 +1,7 @@
-package com.cuidedacidade.di
+package com.cuidedacidade.ui.requests.di
 
-import com.cuidedacidade.ui.requests.RequestsFragment
+import com.cuidedacidade.ui.requests.BaseRequestsFragment
 import dagger.Subcomponent
-
-//TODO Ver escopos
 
 @Subcomponent(modules = [RequestsModule::class])
 interface RequestsComponent {
@@ -12,5 +10,5 @@ interface RequestsComponent {
         fun create(): RequestsComponent
     }
 
-    fun inject(fragment: RequestsFragment)
+    fun inject(fragment: BaseRequestsFragment)
 }

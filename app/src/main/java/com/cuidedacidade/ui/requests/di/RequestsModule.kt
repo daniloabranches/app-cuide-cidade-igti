@@ -1,6 +1,7 @@
-package com.cuidedacidade.di
+package com.cuidedacidade.ui.requests.di
 
 import androidx.lifecycle.ViewModel
+import com.cuidedacidade.di.ViewModelKey
 import com.cuidedacidade.ui.requests.RequestsViewModel
 import dagger.Binds
 import dagger.Module

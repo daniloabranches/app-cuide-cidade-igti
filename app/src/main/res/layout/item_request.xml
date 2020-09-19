@@ -40,6 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@id/txt_date_request"
         app:layout_constraintStart_toEndOf="@+id/img_request"
@@ -54,5 +55,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@sample/requests.json/data/date" />
+
+    <ImageView
+        android:id="@+id/img_status"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/executed_request"
+        android:src="@drawable/ic_executed_request"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_date_request" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,8 @@
-package com.cuidedacidade.mapper
+package com.cuidedacidade.ui.requests.mapper
 
+import com.cuidedacidade.base.ModelDataMapper
 import com.cuidedacidade.domain.entity.Request
-import com.cuidedacidade.model.RequestModel
+import com.cuidedacidade.ui.requests.model.RequestModel
 import javax.inject.Inject
 
 class RequestModelDataMapper @Inject constructor() :

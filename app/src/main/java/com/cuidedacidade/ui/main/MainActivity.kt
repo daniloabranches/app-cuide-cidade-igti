@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFloatingButton() {
         fab.setOnClickListener {
-            findNavController(nav_host_fragment).navigate(R.id.action_RequestsFragment_to_CategoriesFragment)
+            findNavController(nav_host_fragment).navigate(R.id.CategoriesFragment)
         }
     }
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.RequestsFragment -> fab.show()
+                R.id.RequestsFragment, R.id.AllRequestsFragment -> fab.show()
                 else -> fab.hide()
             }
         }

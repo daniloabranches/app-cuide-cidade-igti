@@ -1,4 +1,4 @@
-package com.cuidedacidade.model
+package com.cuidedacidade.ui.requests.model
 
 import java.util.*
 
@@ -11,7 +11,8 @@ data class RequestModel(
     val status: Status
 ) {
     enum class Status(val value: Int) {
-        PENDING(1);
+        PENDING(1),
+        EXECUTED(2);
 
         companion object {
             fun valueOf(value: Int) = values().first { it.value == value }

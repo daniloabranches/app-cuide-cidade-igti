@@ -30,4 +30,20 @@ class RequestDataRepository @Inject constructor(
             }
         }
     }
+
+    override fun getAllRequests(userId: String): Single<MutableList<Request>> {
+        return Single.fromCallable {
+            val requests = db.collection("users").document(userId)
+                .collection("requests").get()
+
+            Tasks.await(requests)
+
+            if (requests.isSuccessful && requests.result != null) {
+                val dataRequests = requests.result!!.toObjectsWithId(RequestEntity::class.java)
+                requestEntityDataMapper.transform(dataRequests)
+            } else {
+                throw requests.exception ?: FirebaseUnspecifiedException()
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.cuidedacidade.di
 
 import android.content.Context
+import com.cuidedacidade.ui.requests.di.RequestsComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -24,6 +25,8 @@ interface AppComponent {
 }
 
 @Module(
-    subcomponents = [RequestsComponent::class]
+    subcomponents = [
+        RequestsComponent::class
+    ]
 )
 object SubcomponentsModule
