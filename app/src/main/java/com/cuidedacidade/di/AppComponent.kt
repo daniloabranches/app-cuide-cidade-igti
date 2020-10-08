@@ -1,6 +1,7 @@
 package com.cuidedacidade.di
 
 import android.content.Context
+import com.cuidedacidade.ui.requestdetails.di.RequestDetailsComponent
 import com.cuidedacidade.ui.requests.di.RequestsComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -22,6 +23,7 @@ interface AppComponent {
     }
 
     fun requestsComponent(): RequestsComponent.Factory
+    fun requestDetailsComponent(): RequestDetailsComponent.Factory
 }
 
 @Module(

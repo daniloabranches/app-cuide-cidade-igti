@@ -22,7 +22,11 @@
         android:id="@+id/CategoriesFragment"
         android:name="com.cuidedacidade.ui.categories.CategoriesFragment"
         android:label="@string/categories_fragment_title"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_CategoriesFragment_to_RequestDetailsFragment"
+            app:destination="@id/RequestDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/AllRequestsFragment"
         android:name="com.cuidedacidade.ui.requests.AllRequestsFragment"
@@ -33,4 +37,9 @@
             android:id="@+id/action_AllRequestsFragment_to_CategoriesFragment"
             app:destination="@id/CategoriesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/RequestDetailsFragment"
+        android:name="com.cuidedacidade.ui.requestdetails.RequestDetailsFragment"
+        android:label="@string/request_details"
+        tools:layout="@layout/fragment_request_details" />
 </navigation>
