@@ -19,13 +19,13 @@ class CategoriesViewModel : ViewModel() {
 
     private fun loadCategories(): List<Category> {
         return listOf(
+            Category("Ônibus", "ic_schooolbus.png"),
             Category("Coleta", "ic_recycle.png"),
             Category("Iluminação Pública", "ic_brightness.png"),
-            Category("Ônibus", "ic_schooolbus.png"),
+            Category("Táxi", "ic_taxi.png"),
             Category("Pavimentação", "ic_tractor.png"),
             Category("Segurança", "ic_security.png"),
             Category("Semáforo", "ic_traffic.png"),
-            Category("Táxi", "ic_taxi.png"),
             Category("Telefones", "ic_phone.png")
         )
     }

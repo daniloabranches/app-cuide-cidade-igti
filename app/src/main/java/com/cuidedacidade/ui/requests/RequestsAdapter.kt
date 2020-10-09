@@ -22,7 +22,7 @@ class RequestsAdapter(requests: List<RequestModel>, private val imageEngine: Ima
 
     private val simpleDateFormat = SimpleDateFormat("dd", Locale.getDefault())
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,7 +34,7 @@ class RequestsAdapter(requests: List<RequestModel>, private val imageEngine: Ima
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.run {
+        holder.itemView.run {
             val request = requests[position]
             txt_category_request.text = request.categoryName
             txt_description_request.text = request.description

@@ -3,36 +3,65 @@ package com.cuidedacidade.ui.categories
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.R
 import com.cuidedacidade.image.ImageEngine
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoriesAdapter(
-    private val categories: List<Category>,
+    categories: List<Category>,
     private val imageEngine: ImageEngine
-) :
-    RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    private val categories: List<Category> by lazy {
+        categories.sortedBy { it.title }
+    }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
-        val from = LayoutInflater.from(parent.context)
-        val view = from.inflate(R.layout.item_category, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.item_category, parent, false)
+        return ViewHolder(view, imageEngine)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.run {
-            val category = categories[position]
-            txt_title_category.text = category.title
-
-            imageEngine.getCategoryImage(category.image, img_category)
-        }
+        val category = getItem(position)
+        holder.bind(category)
     }
 
     override fun getItemCount() = categories.size
+
+    private fun getItem(position: Int) = categories[position]
+
+    class ViewHolder(
+        view: View,
+        private val imageEngine: ImageEngine
+    ) : RecyclerView.ViewHolder(view) {
+        var category: Category? = null
+
+        init {
+            itemView.setOnClickListener {
+                category?.let { category ->
+                    navigateToNewRequest(category, it)
+                }
+            }
+        }
+
+        private fun navigateToNewRequest(
+            category: Category,
+            view: View
+        ) {
+            Toast.makeText(view.context, category.title, Toast.LENGTH_SHORT).show()
+            view.findNavController().navigate(R.id.RequestDetailsFragment)
+        }
+
+        fun bind(category: Category) {
+            this.category = category
+            itemView.apply {
+                txt_title_category.text = category.title
+                imageEngine.getCategoryImage(category.image, img_category)
+            }
+        }
+    }
 }
