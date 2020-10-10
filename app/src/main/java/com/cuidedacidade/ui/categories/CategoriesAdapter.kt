@@ -3,10 +3,10 @@ package com.cuidedacidade.ui.categories
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.R
+import com.cuidedacidade.core.view.OnClickDelayedListener
 import com.cuidedacidade.image.ImageEngine
 import kotlinx.android.synthetic.main.item_category.view.*
 
@@ -38,21 +38,20 @@ class CategoriesAdapter(
         view: View,
         private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
-        var category: Category? = null
+        lateinit var category: Category
 
         init {
-            itemView.setOnClickListener {
-                category?.let { category ->
-                    navigateToNewRequest(category, it)
+            itemView.setOnClickListener(object : OnClickDelayedListener() {
+                override fun onClickDelayed(view: View) {
+                    navigateToNewRequest(category, view)
                 }
-            }
+            })
         }
 
         private fun navigateToNewRequest(
             category: Category,
             view: View
         ) {
-            Toast.makeText(view.context, category.title, Toast.LENGTH_SHORT).show()
             view.findNavController().navigate(R.id.RequestDetailsFragment)
         }
 

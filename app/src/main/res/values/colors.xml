@@ -3,6 +3,7 @@
     <color name="colorPrimary">#5FB660</color>
     <color name="colorPrimaryDark">#3E733F</color>
     <color name="colorAccent">#5FB660</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
 
     <color name="colorScreenTitle">#3E733F</color>
 </resources>
