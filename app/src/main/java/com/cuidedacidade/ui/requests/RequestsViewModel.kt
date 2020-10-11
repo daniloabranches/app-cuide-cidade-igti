@@ -2,7 +2,7 @@ package com.cuidedacidade.ui.requests
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.cuidedacidade.base.BaseViewModel
 import com.cuidedacidade.core.flow.Resource
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.usecase.GetAllRequestsUseCase
@@ -13,7 +13,6 @@ import com.cuidedacidade.security.Auth
 import com.cuidedacidade.ui.requests.mapper.RequestModelDataMapper
 import com.cuidedacidade.ui.requests.model.RequestModel
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class RequestsViewModel @Inject constructor(
@@ -21,9 +20,7 @@ class RequestsViewModel @Inject constructor(
     private val requestModelDataMapper: RequestModelDataMapper,
     private val getPendingRequestsUseCase: GetPendingRequestsUseCase,
     private val getAllRequestsUseCase: GetAllRequestsUseCase
-) : ViewModel() {
-    private val compositeDisposable = CompositeDisposable()
-
+) : BaseViewModel() {
     private val pendingRequests: MutableLiveData<Resource<List<RequestModel>>> by lazy {
         val liveData = MutableLiveData<Resource<List<RequestModel>>>()
         loadPendingRequests(liveData)
@@ -54,7 +51,7 @@ class RequestsViewModel @Inject constructor(
         liveData: MutableLiveData<Resource<List<RequestModel>>>,
         useCase: Single<MutableList<Request>>
     ) {
-        compositeDisposable.clear()
+        clearCompositeDisposable()
 
         liveData.value = Resource.Loading()
 
@@ -72,11 +69,6 @@ class RequestsViewModel @Inject constructor(
                     liveData.value = Resource.Error(null, it)
                 })
 
-        compositeDisposable.add(subscriptionGetPendingRequestsUseCase)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
+        addCompositeDisposable(subscriptionGetPendingRequestsUseCase)
     }
 }

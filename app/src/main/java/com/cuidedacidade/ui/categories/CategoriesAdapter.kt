@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.R
 import com.cuidedacidade.core.view.OnClickDelayedListener
 import com.cuidedacidade.image.ImageEngine
+import com.cuidedacidade.ui.categories.model.CategoryModel
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoriesAdapter(
-    categories: List<Category>,
+    categories: List<CategoryModel>,
     private val imageEngine: ImageEngine
 ) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
-    private val categories: List<Category> by lazy {
+    private val categories: List<CategoryModel> by lazy {
         categories.sortedBy { it.title }
     }
 
@@ -38,7 +39,7 @@ class CategoriesAdapter(
         view: View,
         private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
-        lateinit var category: Category
+        lateinit var category: CategoryModel
 
         init {
             itemView.setOnClickListener(object : OnClickDelayedListener() {
@@ -49,13 +50,14 @@ class CategoriesAdapter(
         }
 
         private fun navigateToNewRequest(
-            category: Category,
+            category: CategoryModel,
             view: View
         ) {
-            view.findNavController().navigate(R.id.RequestDetailsFragment)
+            val action = CategoriesFragmentDirections.newRequestDetailsAction(category)
+            view.findNavController().navigate(action)
         }
 
-        fun bind(category: Category) {
+        fun bind(category: CategoryModel) {
             this.category = category
             itemView.apply {
                 txt_title_category.text = category.title
