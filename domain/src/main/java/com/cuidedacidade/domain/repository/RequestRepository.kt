@@ -6,4 +6,5 @@ import io.reactivex.rxjava3.core.Single
 interface RequestRepository {
     fun getPendingRequests(userId: String): Single<MutableList<Request>>
     fun getAllRequests(userId: String): Single<MutableList<Request>>
+    fun saveRequest(userId: String, request: Request)
 }

@@ -28,4 +28,5 @@
     <string name="category">Categoria</string>
     <string name="help_request_details">Descreva aqui sua solicitação</string>
     <string name="description">Descrição</string>
+    <string name="send">Enviar</string>
 </resources>

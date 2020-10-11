@@ -10,12 +10,11 @@
         android:name="com.cuidedacidade.ui.requests.RequestsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_requests">
-
         <action
-            android:id="@+id/action_RequestsFragment_to_CategoriesFragment"
+            android:id="@+id/newRequestAction"
             app:destination="@id/CategoriesFragment" />
         <action
-            android:id="@+id/action_RequestsFragment_to_AllRequestsFragment"
+            android:id="@+id/allRequestsAction"
             app:destination="@id/AllRequestsFragment" />
     </fragment>
     <fragment
@@ -24,22 +23,29 @@
         android:label="@string/categories_fragment_title"
         tools:layout="@layout/fragment_categories">
         <action
-            android:id="@+id/action_CategoriesFragment_to_RequestDetailsFragment"
-            app:destination="@id/RequestDetailsFragment" />
+            android:id="@+id/newRequestDetailsAction"
+            app:destination="@id/RequestDetailsFragment">
+            <argument
+                android:name="category"
+                app:argType="com.cuidedacidade.ui.categories.model.CategoryModel" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/AllRequestsFragment"
         android:name="com.cuidedacidade.ui.requests.AllRequestsFragment"
         android:label="@string/requests"
         tools:layout="@layout/fragment_requests">
-
         <action
-            android:id="@+id/action_AllRequestsFragment_to_CategoriesFragment"
+            android:id="@+id/newRequestAction"
             app:destination="@id/CategoriesFragment" />
     </fragment>
     <fragment
         android:id="@+id/RequestDetailsFragment"
         android:name="com.cuidedacidade.ui.requestdetails.RequestDetailsFragment"
         android:label="@string/request_details"
-        tools:layout="@layout/fragment_request_details" />
+        tools:layout="@layout/fragment_request_details">
+        <argument
+            android:name="category"
+            app:argType="com.cuidedacidade.ui.categories.model.CategoryModel" />
+    </fragment>
 </navigation>

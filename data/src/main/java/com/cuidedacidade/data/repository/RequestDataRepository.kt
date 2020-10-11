@@ -46,4 +46,25 @@ class RequestDataRepository @Inject constructor(
             }
         }
     }
+
+    override fun saveRequest(userId: String, request: Request) {
+        //TODO Rever
+
+        val data = hashMapOf(
+            "category_name" to request.categoryName,
+            "description" to request.description,
+            "image" to request.image,
+            "date" to request.date,
+            "status" to request.status.value
+        )
+
+        db.collection("users").document(userId)
+            .collection("requests").add(data)
+            .addOnSuccessListener { documentReference ->
+
+            }
+            .addOnFailureListener { e ->
+
+            }
+    }
 }
