@@ -14,21 +14,32 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/choose_category"
-        app:layout_constraintBottom_toTopOf="@id/list_categories"
+        app:layout_constraintBottom_toTopOf="@id/swp_requests"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_categories"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swp_requests"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_title_choose_category"
-        app:spanCount="3"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_category" />
+        app:layout_constraintTop_toBottomOf="@id/txt_title_choose_category">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_categories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_title_choose_category"
+            app:spanCount="3"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_category" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

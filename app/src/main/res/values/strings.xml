@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Cuide da Cidade</string>
 
-    <string name="generic_error_requests_message">Erro ao buscar as solicitações. Tente novamente mais tarde :(</string>
-
     <string name="jan">jan</string>
     <string name="feb">fev</string>
     <string name="mar">mar</string>
@@ -16,6 +14,7 @@
     <string name="nov">nov</string>
     <string name="dec">dez</string>
 
+    <string name="something_unexpected_happened_try_again_later">Ocorreu algo inesperado. Tente novamente mais tarde :(</string>
     <string name="choose_category">Escolha uma categoria</string>
     <string name="pending_requests">Solicitações pendentes</string>
     <string name="today">Hoje</string>
@@ -29,4 +28,8 @@
     <string name="help_request_details">Descreva aqui sua solicitação</string>
     <string name="description">Descrição</string>
     <string name="send">Enviar</string>
+    <string name="saving">Salvando…</string>
+    <string name="something_unexpected_happened_we_will_try_again">Ocorreu algo inesperado. Tentaremos novamente.</string>
+    <string name="request_sent">Solicitação enviada</string>
+    <string name="ok">OK</string>
 </resources>

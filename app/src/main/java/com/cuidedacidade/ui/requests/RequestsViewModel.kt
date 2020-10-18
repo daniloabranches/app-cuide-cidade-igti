@@ -56,7 +56,6 @@ class RequestsViewModel @Inject constructor(
         liveData.value = Resource.Loading()
 
         val subscriptionGetPendingRequestsUseCase = useCase
-            .retry(1)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .map(requestModelDataMapper)

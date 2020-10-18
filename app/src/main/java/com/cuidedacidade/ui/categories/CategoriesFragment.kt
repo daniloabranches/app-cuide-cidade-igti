@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,9 @@ import com.cuidedacidade.base.BaseFragment
 import com.cuidedacidade.core.flow.Resource
 import com.cuidedacidade.image.ImageEngine
 import com.cuidedacidade.ui.categories.model.CategoryModel
+import com.cuidedacidade.utils.SwipeRefreshUtils
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_categories.*
 import javax.inject.Inject
 
@@ -37,6 +39,7 @@ class CategoriesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list_categories.setHasFixedSize(true)
+        SwipeRefreshUtils.setDefaultColorScheme(requireActivity(), swp_requests)
         viewModel.getCategories().observe(viewLifecycleOwner, observerCategories)
     }
 
@@ -50,15 +53,21 @@ class CategoriesFragment : BaseFragment() {
 
     private fun setupUI(categories: List<CategoryModel>?) {
         list_categories.adapter = categories?.let { CategoriesAdapter(categories, ImageEngine) }
-        //TODO Remover indicador de carregamento
+        swp_requests.isRefreshing = false
+        swp_requests.isEnabled = false
     }
 
     private fun setupUIRefreshing() {
-        //TODO Exibir indicador de carregamento
+        swp_requests.isRefreshing = true
     }
 
     private fun setupUIWithError() {
-        Toast.makeText(activity, R.string.generic_error_requests_message, Toast.LENGTH_SHORT).show()
-        //TODO Remover indicador de carregamento
+        swp_requests.isRefreshing = false
+        swp_requests.isEnabled = false
+        Snackbar.make(
+            requireActivity().mainCoordinatorLayout,
+            R.string.something_unexpected_happened_try_again_later,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }

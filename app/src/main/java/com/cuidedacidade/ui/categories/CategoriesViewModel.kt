@@ -30,7 +30,6 @@ class CategoriesViewModel @Inject constructor(
         liveData.value = Resource.Loading()
 
         val subscriptioGetCategoriesUseCase = getCategoriesUseCase()
-            .retry(1)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .map(categoryModelDataMapper)

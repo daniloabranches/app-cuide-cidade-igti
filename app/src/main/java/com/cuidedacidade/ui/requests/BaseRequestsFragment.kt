@@ -2,18 +2,19 @@ package com.cuidedacidade.ui.requests
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.base.BaseFragment
-import com.cuidedacidade.core.extensions.setDefaults
 import com.cuidedacidade.core.flow.Resource
 import com.cuidedacidade.image.ImageEngine
 import com.cuidedacidade.ui.requests.model.RequestModel
+import com.cuidedacidade.utils.SwipeRefreshUtils
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_requests.*
 import javax.inject.Inject
 
@@ -38,13 +39,11 @@ open class BaseRequestsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        lst_requests.setDefaults()
-
-        //TODO Aplicar global
-        activity?.let {
-            swp_requests.setColorSchemeColors(ContextCompat.getColor(it, R.color.colorAccent))
+        lst_requests.apply {
+            setHasFixedSize(true)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+        SwipeRefreshUtils.setDefaultColorScheme(swp_requests.context, swp_requests)
     }
 
     private fun setupUI(requests: List<RequestModel>?) {
@@ -57,7 +56,11 @@ open class BaseRequestsFragment : BaseFragment() {
     }
 
     private fun setupUIWithError() {
-        Toast.makeText(activity, R.string.generic_error_requests_message, Toast.LENGTH_SHORT).show()
         swp_requests.isRefreshing = false
+        Snackbar.make(
+            requireActivity().mainCoordinatorLayout,
+            R.string.something_unexpected_happened_try_again_later,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }
