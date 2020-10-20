@@ -12,13 +12,13 @@ class SaveRequestUseCase @Inject constructor(
     operator fun invoke(userId: String, request: Request): Observable<Unit> {
         return Observable.create<Unit> {
             if (request.categoryName.isBlank()) {
-                throw ValidationException("A categoria não foi informada")
+                throw ValidationException("Informe a categoria para a solicitação")
             }
             if (request.description.isBlank()) {
                 throw ValidationException("Informe a descrição para a solicitação")
             }
             if (request.image.isBlank()) {
-                throw ValidationException("A imagem da categoria não foi informada")
+                throw ValidationException("Informe a imagem da categoria para a solicitação")
             }
             it.onNext(Unit)
             it.onComplete()

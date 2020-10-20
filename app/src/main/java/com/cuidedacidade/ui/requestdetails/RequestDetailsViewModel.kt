@@ -14,8 +14,6 @@ import com.cuidedacidade.ui.categories.CategoryBundle
 import java.util.*
 import javax.inject.Inject
 
-private const val NEW_REQUEST_ID = ""
-
 class RequestDetailsViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val saveRequestUseCase: SaveRequestUseCase
@@ -44,13 +42,15 @@ class RequestDetailsViewModel @Inject constructor(
         return liveData
     }
 
-    private fun createRequest(categoryBundle: CategoryBundle, description: String) =
-        Request(
-            NEW_REQUEST_ID,
+    private fun createRequest(categoryBundle: CategoryBundle, description: String): Request {
+        val newRequestId = ""
+        return Request(
+            newRequestId,
             categoryBundle.title,
             description,
             categoryBundle.image,
             Date(),
             Request.Status.PENDING
         )
+    }
 }
