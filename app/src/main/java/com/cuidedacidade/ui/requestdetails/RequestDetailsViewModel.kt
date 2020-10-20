@@ -1,5 +1,6 @@
 package com.cuidedacidade.ui.requestdetails
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cuidedacidade.base.BaseViewModel
 import com.cuidedacidade.core.flow.Resource
@@ -9,7 +10,7 @@ import com.cuidedacidade.domain.usecase.SaveRequestUseCase
 import com.cuidedacidade.log.Log
 import com.cuidedacidade.rx.SchedulerProvider
 import com.cuidedacidade.security.Auth
-import com.cuidedacidade.ui.categories.model.CategoryModel
+import com.cuidedacidade.ui.categories.CategoryBundle
 import java.util.*
 import javax.inject.Inject
 
@@ -19,10 +20,10 @@ class RequestDetailsViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val saveRequestUseCase: SaveRequestUseCase
 ) : BaseViewModel() {
-    fun saveRequest(category: CategoryModel, description: String): MutableLiveData<Resource<Unit>> {
+    fun saveRequest(categoryBundle: CategoryBundle, description: String): LiveData<Resource<Unit>> {
         clearCompositeDisposable()
         val liveData = MutableLiveData<Resource<Unit>>()
-        val request = createRequest(category, description)
+        val request = createRequest(categoryBundle, description)
         val subscriptionSaveRequestUseCase = saveRequestUseCase(Auth.USER, request)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
@@ -39,16 +40,16 @@ class RequestDetailsViewModel @Inject constructor(
                 {
                     liveData.value = Resource.Success(Unit)
                 })
-        addCompositeDisposable(subscriptionSaveRequestUseCase)
+        addInCompositeDisposable(subscriptionSaveRequestUseCase)
         return liveData
     }
 
-    private fun createRequest(category: CategoryModel, description: String) =
+    private fun createRequest(categoryBundle: CategoryBundle, description: String) =
         Request(
             NEW_REQUEST_ID,
-            category.title,
+            categoryBundle.title,
             description,
-            category.image,
+            categoryBundle.image,
             Date(),
             Request.Status.PENDING
         )

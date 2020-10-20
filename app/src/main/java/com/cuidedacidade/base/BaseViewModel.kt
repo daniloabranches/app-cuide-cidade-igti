@@ -12,7 +12,7 @@ abstract class BaseViewModel : ViewModel() {
         clearCompositeDisposable()
     }
 
-    fun addCompositeDisposable(disposable: Disposable) = compositeDisposable.add(disposable)
+    fun addInCompositeDisposable(disposable: Disposable) = compositeDisposable.add(disposable)
 
     fun clearCompositeDisposable() = compositeDisposable.clear()
 }

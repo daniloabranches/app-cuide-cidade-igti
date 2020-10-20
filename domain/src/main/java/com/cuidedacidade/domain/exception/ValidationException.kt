@@ -1,3 +1,3 @@
 package com.cuidedacidade.domain.exception
 
-class ValidationException(message: String) : Exception(message)
+class ValidationException(val validationMessage: String) : Exception(validationMessage)

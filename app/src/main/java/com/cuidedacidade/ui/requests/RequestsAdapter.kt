@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.R
 import com.cuidedacidade.core.utils.DateUtils
+import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.image.ImageEngine
-import com.cuidedacidade.ui.requests.model.RequestModel
 import kotlinx.android.synthetic.main.item_request.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RequestsAdapter(requests: List<RequestModel>, private val imageEngine: ImageEngine) :
+class RequestsAdapter(requests: List<Request>, private val imageEngine: ImageEngine) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
-    private val requests: List<RequestModel> by lazy {
+    private val requests: List<Request> by lazy {
         requests.sortedByDescending { it.date }
     }
 
@@ -41,7 +41,7 @@ class RequestsAdapter(requests: List<RequestModel>, private val imageEngine: Ima
             txt_date_request.text = extractFormattedDate(context, request.date)
 
             img_status.visibility = when (request.status) {
-                RequestModel.Status.EXECUTED -> View.VISIBLE
+                Request.Status.EXECUTED -> View.VISIBLE
                 else -> View.GONE
             }
 

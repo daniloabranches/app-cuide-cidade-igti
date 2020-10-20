@@ -5,6 +5,7 @@ import com.cuidedacidade.data.exception.FirebaseUnspecifiedException
 import com.cuidedacidade.data.extensions.getSync
 import com.cuidedacidade.data.extensions.toObjectsWithId
 import com.cuidedacidade.data.mapper.CategoryEntityDataMapper
+import com.cuidedacidade.data.repository.collections.CategoriesCollection
 import com.cuidedacidade.domain.entity.Category
 import com.cuidedacidade.domain.repository.CategoryRepository
 import io.reactivex.rxjava3.core.Single
@@ -15,12 +16,14 @@ class CategoryDataRepository @Inject constructor(
 ) : BaseRepository(), CategoryRepository {
     override fun getCategories(): Single<MutableList<Category>> {
         return Single.fromCallable {
-            val categories = db.collection("categories").getSync()
-            if (categories.isSuccessful && categories.result != null) {
-                val dataCategories = categories.result!!.toObjectsWithId(CategoryEntity::class.java)
-                categoryEntityDataMapper.transform(dataCategories)
-            } else {
-                throw categories.exception ?: FirebaseUnspecifiedException()
+            db.collection(CategoriesCollection.name).getSync().let { categories ->
+                if (categories.isSuccessful && categories.result != null) {
+                    categories.result!!.toObjectsWithId(CategoryEntity::class.java).let {
+                        categoryEntityDataMapper.transform(it)
+                    }
+                } else {
+                    throw categories.exception ?: FirebaseUnspecifiedException()
+                }
             }
         }
     }

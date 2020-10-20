@@ -10,8 +10,8 @@ import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.base.BaseFragment
 import com.cuidedacidade.core.flow.Resource
+import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.image.ImageEngine
-import com.cuidedacidade.ui.requests.model.RequestModel
 import com.cuidedacidade.utils.SwipeRefreshUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +24,7 @@ open class BaseRequestsFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     protected val viewModel by viewModels<RequestsViewModel> { viewModelFactory }
 
-    protected val observerRequests = Observer<Resource<List<RequestModel>>> { requests ->
+    protected val observerRequests = Observer<Resource<List<Request>>> { requests ->
         when (requests) {
             is Resource.Loading -> setupUIRefreshing()
             is Resource.Success -> setupUI(requests.data)
@@ -43,10 +43,10 @@ open class BaseRequestsFragment : BaseFragment() {
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
-        SwipeRefreshUtils.setDefaultColorScheme(swp_requests.context, swp_requests)
+        SwipeRefreshUtils.setDefaultColorSchemeResources(swp_requests)
     }
 
-    private fun setupUI(requests: List<RequestModel>?) {
+    private fun setupUI(requests: List<Request>?) {
         lst_requests.adapter = requests?.let { RequestsAdapter(it, ImageEngine) }
         swp_requests.isRefreshing = false
     }

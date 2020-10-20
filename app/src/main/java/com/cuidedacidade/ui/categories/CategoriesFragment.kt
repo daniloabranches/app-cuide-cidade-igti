@@ -11,8 +11,8 @@ import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.base.BaseFragment
 import com.cuidedacidade.core.flow.Resource
+import com.cuidedacidade.domain.entity.Category
 import com.cuidedacidade.image.ImageEngine
-import com.cuidedacidade.ui.categories.model.CategoryModel
 import com.cuidedacidade.utils.SwipeRefreshUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,11 +39,11 @@ class CategoriesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list_categories.setHasFixedSize(true)
-        SwipeRefreshUtils.setDefaultColorScheme(requireActivity(), swp_requests)
+        SwipeRefreshUtils.setDefaultColorSchemeResources(swp_requests)
         viewModel.getCategories().observe(viewLifecycleOwner, observerCategories)
     }
 
-    private val observerCategories = Observer<Resource<List<CategoryModel>>> { categories ->
+    private val observerCategories = Observer<Resource<List<Category>>> { categories ->
         when (categories) {
             is Resource.Loading -> setupUIRefreshing()
             is Resource.Success -> setupUI(categories.data)
@@ -51,7 +51,7 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    private fun setupUI(categories: List<CategoryModel>?) {
+    private fun setupUI(categories: List<Category>?) {
         list_categories.adapter = categories?.let { CategoriesAdapter(categories, ImageEngine) }
         swp_requests.isRefreshing = false
         swp_requests.isEnabled = false

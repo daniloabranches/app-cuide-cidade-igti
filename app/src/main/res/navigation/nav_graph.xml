@@ -27,7 +27,7 @@
             app:destination="@id/RequestDetailsFragment">
             <argument
                 android:name="category"
-                app:argType="com.cuidedacidade.ui.categories.model.CategoryModel" />
+                app:argType="com.cuidedacidade.ui.categories.CategoryBundle" />
         </action>
     </fragment>
     <fragment
@@ -51,6 +51,6 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="category"
-            app:argType="com.cuidedacidade.ui.categories.model.CategoryModel" />
+            app:argType="com.cuidedacidade.ui.categories.CategoryBundle" />
     </fragment>
 </navigation>

@@ -11,8 +11,10 @@ import com.cuidedacidade.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.base.BaseFragment
 import com.cuidedacidade.core.flow.Resource
+import com.cuidedacidade.core.utils.KeyboardUtils
 import com.cuidedacidade.domain.exception.ValidationException
-import com.google.android.material.snackbar.Snackbar
+import com.cuidedacidade.utils.AlertDialogUtils
+import com.cuidedacidade.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_request_details.*
 import javax.inject.Inject
@@ -79,40 +81,34 @@ class RequestDetailsFragment : BaseFragment() {
     }
 
     private fun onSuccessSaveRequest() {
-        hideKeyboard()
-        findNavController().navigate(R.id.finishNewRequestAction)
-        Snackbar.make(
-            requireActivity().mainCoordinatorLayout,
-            R.string.request_sent,
-            Snackbar.LENGTH_LONG
-        ).show()
+        activity?.let {
+            KeyboardUtils.hideKeyboard(it)
+            findNavController().navigate(R.id.finishNewRequestAction)
+            SnackbarUtils.show(it.mainCoordinatorLayout, R.string.request_sent)
+        }
     }
 
     private fun onLoadingSaveRequest() {
-        hideKeyboard()
-        Snackbar.make(
-            requireActivity().mainCoordinatorLayout,
-            R.string.saving,
-            Snackbar.LENGTH_LONG
-        ).show()
+        activity?.let {
+            KeyboardUtils.hideKeyboard(it)
+            SnackbarUtils.show(it.mainCoordinatorLayout, R.string.saving)
+        }
     }
 
     private fun onErrorSaveRequest(throwable: Throwable?) {
-        hideKeyboard()
-        if (throwable is ValidationException) {
-            showAlert(
-                throwable.message
-                    ?: getString(R.string.something_unexpected_happened_try_again_later)
-            )
-            return
+        activity?.let {
+            KeyboardUtils.hideKeyboard(it)
+            when (throwable) {
+                is ValidationException ->
+                    AlertDialogUtils.showAlert(it, throwable.validationMessage)
+                else -> {
+                    findNavController().navigate(R.id.finishNewRequestAction)
+                    SnackbarUtils.show(
+                        it.mainCoordinatorLayout,
+                        R.string.something_unexpected_happened_we_will_try_again
+                    )
+                }
+            }
         }
-
-        findNavController().navigate(R.id.finishNewRequestAction)
-
-        Snackbar.make(
-            requireActivity().mainCoordinatorLayout,
-            R.string.something_unexpected_happened_we_will_try_again,
-            Snackbar.LENGTH_LONG
-        ).show()
     }
 }
