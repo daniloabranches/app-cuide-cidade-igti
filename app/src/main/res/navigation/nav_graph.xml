@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/RequestsFragment">
+    app:startDestination="@id/PendingRequestsFragment">
+
+    <action
+        android:id="@+id/detailsRequestDetailsAction"
+        app:destination="@id/RequestDetailsFragment">
+        <argument
+            android:name="request"
+            app:argType="com.cuidedacidade.feature.request.RequestBundle" />
+    </action>
 
     <fragment
-        android:id="@+id/RequestsFragment"
-        android:name="com.cuidedacidade.ui.requests.RequestsFragment"
+        android:id="@+id/PendingRequestsFragment"
+        android:name="com.cuidedacidade.feature.requests.PendingRequestsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_requests">
         <action
@@ -19,20 +27,20 @@
     </fragment>
     <fragment
         android:id="@+id/CategoriesFragment"
-        android:name="com.cuidedacidade.ui.categories.CategoriesFragment"
+        android:name="com.cuidedacidade.feature.categories.CategoriesFragment"
         android:label="@string/categories_fragment_title"
         tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/newRequestDetailsAction"
-            app:destination="@id/RequestDetailsFragment">
+            app:destination="@id/NewRequestFragment">
             <argument
                 android:name="category"
-                app:argType="com.cuidedacidade.ui.categories.CategoryBundle" />
+                app:argType="com.cuidedacidade.feature.request.CategoryBundle" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/AllRequestsFragment"
-        android:name="com.cuidedacidade.ui.requests.AllRequestsFragment"
+        android:name="com.cuidedacidade.feature.requests.AllRequestsFragment"
         android:label="@string/requests"
         tools:layout="@layout/fragment_requests">
         <action
@@ -40,17 +48,26 @@
             app:destination="@id/CategoriesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/RequestDetailsFragment"
-        android:name="com.cuidedacidade.ui.requestdetails.RequestDetailsFragment"
+        android:id="@+id/NewRequestFragment"
+        android:name="com.cuidedacidade.feature.request.NewRequestFragment"
         android:label="@string/request_details"
         tools:layout="@layout/fragment_request_details">
         <action
             android:id="@+id/finishNewRequestAction"
-            app:destination="@id/RequestsFragment"
-            app:popUpTo="@+id/RequestsFragment"
+            app:destination="@id/PendingRequestsFragment"
+            app:popUpTo="@+id/PendingRequestsFragment"
             app:popUpToInclusive="true" />
         <argument
             android:name="category"
-            app:argType="com.cuidedacidade.ui.categories.CategoryBundle" />
+            app:argType="com.cuidedacidade.feature.request.CategoryBundle" />
+    </fragment>
+    <fragment
+        android:id="@+id/RequestDetailsFragment"
+        android:name="com.cuidedacidade.feature.request.RequestDetailsFragment"
+        android:label="@string/request_details"
+        tools:layout="@layout/fragment_request_details">
+        <argument
+            android:name="request"
+            app:argType="com.cuidedacidade.feature.request.RequestBundle" />
     </fragment>
 </navigation>

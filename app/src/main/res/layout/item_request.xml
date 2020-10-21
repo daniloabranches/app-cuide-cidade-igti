@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:paddingTop="15dp"
     android:paddingBottom="15dp">
 
@@ -38,9 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@id/txt_date_request"
         app:layout_constraintStart_toEndOf="@+id/img_request"
