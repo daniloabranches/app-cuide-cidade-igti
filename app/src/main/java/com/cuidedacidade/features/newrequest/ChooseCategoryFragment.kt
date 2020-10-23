@@ -1,53 +1,60 @@
-package com.cuidedacidade.feature.requests
+package com.cuidedacidade.features.newrequest
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.cuidedacidade.core.CCidadeApplication
 import com.cuidedacidade.R
 import com.cuidedacidade.core.BaseFragment
 import com.cuidedacidade.core.network.Resource
-import com.cuidedacidade.domain.entity.Request
+import com.cuidedacidade.domain.entity.Category
 import com.cuidedacidade.core.image.ImageEngine
 import com.cuidedacidade.utils.SwipeRefreshUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_requests.*
+import kotlinx.android.synthetic.main.fragment_categories.*
 import javax.inject.Inject
 
-abstract class BaseRequestsFragment : BaseFragment() {
+class ChooseCategoryFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    protected val viewModel by viewModels<RequestsViewModel> { viewModelFactory }
-
-    protected val observerRequests = Observer<Resource<List<Request>>> { requests ->
-        when (requests) {
-            is Resource.Loading -> setupUIRefreshing()
-            is Resource.Success -> setupUI(requests.data)
-            is Resource.Error -> setupUIWithError()
-        }
-    }
+    private val viewModel by viewModels<ChooseCategoryViewModel> { viewModelFactory }
 
     override fun setupDI() {
         (requireActivity().application as CCidadeApplication).appComponent
-            .requestsComponent().create().inject(this)
+            .categoriesComponent().create().inject(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lst_requests.apply {
-            setHasFixedSize(true)
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        }
+        list_categories.setHasFixedSize(true)
         SwipeRefreshUtils.setDefaultColorSchemeResources(swp_requests)
+        viewModel.getCategories().observe(viewLifecycleOwner, observerCategories)
     }
 
-    private fun setupUI(requests: List<Request>?) {
-        lst_requests.adapter = requests?.let { RequestsAdapter(it, ImageEngine) }
+    private val observerCategories = Observer<Resource<List<Category>>> { categories ->
+        when (categories) {
+            is Resource.Loading -> setupUIRefreshing()
+            is Resource.Success -> setupUI(categories.data)
+            is Resource.Error -> setupUIWithError()
+        }
+    }
+
+    private fun setupUI(categories: List<Category>?) {
+        list_categories.adapter = categories?.let { ChooseCategoryAdapter(categories, ImageEngine) }
         swp_requests.isRefreshing = false
+        swp_requests.isEnabled = false
     }
 
     private fun setupUIRefreshing() {
@@ -56,6 +63,7 @@ abstract class BaseRequestsFragment : BaseFragment() {
 
     private fun setupUIWithError() {
         swp_requests.isRefreshing = false
+        swp_requests.isEnabled = false
         Snackbar.make(
             requireActivity().mainCoordinatorLayout,
             R.string.something_unexpected_happened_try_again_later,

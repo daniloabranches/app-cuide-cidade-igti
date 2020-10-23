@@ -8,6 +8,7 @@ data class Request(
     val description: String,
     val image: String,
     val date: Date,
+    val completionDate: Date?,
     val status: Status
 ) {
     enum class Status(val value: Int) {

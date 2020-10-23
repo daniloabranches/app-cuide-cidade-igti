@@ -17,6 +17,7 @@ class RequestEntityDataMapper @Inject constructor() {
             dataRequest.description,
             dataRequest.image,
             dataRequest.date,
+            dataRequest.completion_date,
             Request.Status.valueOf(dataRequest.status)
         )
 }

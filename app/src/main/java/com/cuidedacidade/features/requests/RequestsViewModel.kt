@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.requests
+package com.cuidedacidade.features.requests
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

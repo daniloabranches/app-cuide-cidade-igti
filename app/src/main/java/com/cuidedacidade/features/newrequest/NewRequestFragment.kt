@@ -1,26 +1,42 @@
-package com.cuidedacidade.feature.request
+package com.cuidedacidade.features.newrequest
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cuidedacidade.R
+import com.cuidedacidade.core.BaseFragment
+import com.cuidedacidade.core.CCidadeApplication
 import com.cuidedacidade.core.network.Resource
 import com.cuidedacidade.core.utils.KeyboardUtils
 import com.cuidedacidade.domain.exception.ValidationException
 import com.cuidedacidade.utils.AlertDialogUtils
 import com.cuidedacidade.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_request_details.*
+import kotlinx.android.synthetic.main.fragment_new_request.*
+import javax.inject.Inject
 
-class NewRequestFragment : BaseRequestFragment() {
-    private val viewModel by viewModels<RequestViewModel> { viewModelFactory }
+class NewRequestFragment : BaseFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<NewRequestViewModel> { viewModelFactory }
     private val args: NewRequestFragmentArgs by navArgs()
+
+    override fun setupDI() {
+        (requireActivity().application as CCidadeApplication).appComponent
+            .requestComponent().create().inject(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_new_request, container, false)
+    }
 
     private val saveRequestObserver = Observer<Resource<Unit>> {
         when (it) {
@@ -49,9 +65,9 @@ class NewRequestFragment : BaseRequestFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        txt_category_request.editText?.setText(args.category.title)
-        txt_description_request.editText?.setOnFocusChangeListener { _, hasFocus ->
-            txt_description_request.hint = getString(
+        txt_request_category.editText?.setText(args.category.title)
+        txt_request_description.editText?.setOnFocusChangeListener { _, hasFocus ->
+            txt_request_description.hint = getString(
                 if (hasFocus) R.string.description else R.string.help_request_details
             )
         }
@@ -60,7 +76,7 @@ class NewRequestFragment : BaseRequestFragment() {
     private fun saveRequest() {
         viewModel.saveRequest(
             args.category,
-            txt_description_request.editText!!.text.toString()
+            txt_request_description.editText!!.text.toString()
         ).observe(viewLifecycleOwner, saveRequestObserver)
     }
 

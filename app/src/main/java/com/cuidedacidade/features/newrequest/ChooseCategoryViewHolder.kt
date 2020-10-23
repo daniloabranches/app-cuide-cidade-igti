@@ -1,15 +1,15 @@
-package com.cuidedacidade.feature.categories
+package com.cuidedacidade.features.newrequest
 
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.core.view.OnClickDelayedListener
 import com.cuidedacidade.domain.entity.Category
-import com.cuidedacidade.feature.request.CategoryBundle
+import com.cuidedacidade.features.request.CategoryBundle
 import com.cuidedacidade.core.image.ImageEngine
 import kotlinx.android.synthetic.main.item_category.view.*
 
-class CategoryViewHolder(
+class ChooseCategoryViewHolder(
     view: View,
     private val imageEngine: ImageEngine
 ) : RecyclerView.ViewHolder(view) {
@@ -31,7 +31,7 @@ class CategoryViewHolder(
             category.title,
             category.image
         )
-        val action = CategoriesFragmentDirections.newRequestDetailsAction(categoryBundle)
+        val action = ChooseCategoryFragmentDirections.newRequestDetailsAction(categoryBundle)
         view.findNavController().navigate(action)
     }
 

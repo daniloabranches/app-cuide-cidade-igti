@@ -1,6 +1,6 @@
-package com.cuidedacidade.feature.requests.di
+package com.cuidedacidade.features.requests.di
 
-import com.cuidedacidade.feature.requests.BaseRequestsFragment
+import com.cuidedacidade.features.requests.BaseRequestsFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [RequestsModule::class])

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".feature.categories.CategoriesFragment">
+    tools:context=".features.newrequest.ChooseCategoryFragment">
 
     <TextView
         android:id="@+id/txt_title_choose_category"

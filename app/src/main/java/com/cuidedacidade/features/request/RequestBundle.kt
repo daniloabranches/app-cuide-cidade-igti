@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.request
+package com.cuidedacidade.features.request
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -9,6 +9,7 @@ data class RequestBundle(
     val categoryName: String,
     val description: String,
     val date: Date,
+    val completionDate: Date?,
     val status: Status
 ) : Parcelable {
     enum class Status(val value: Int) {

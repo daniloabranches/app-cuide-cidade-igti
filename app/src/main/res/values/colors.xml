@@ -6,4 +6,6 @@
     <color name="colorOnSecondary">#FFFFFF</color>
 
     <color name="colorScreenTitle">#3E733F</color>
+    <color name="colorRequestPending">#E43E3E</color>
+    <color name="colorRequestCompleted">#3E733F</color>
 </resources>

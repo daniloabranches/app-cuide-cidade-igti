@@ -25,6 +25,8 @@
     <string name="executed_request">Solicitação executada</string>
     <string name="request_details">Detalhes da solicitação</string>
     <string name="category">Categoria</string>
+    <string name="request_date">Data da solicitação</string>
+    <string name="request_completion_date">Data da conclusão</string>
     <string name="help_request_details">Descreva aqui sua solicitação</string>
     <string name="description">Descrição</string>
     <string name="send">Enviar</string>
@@ -32,4 +34,6 @@
     <string name="something_unexpected_happened_we_will_try_again">Ocorreu algo inesperado. Tentaremos novamente.</string>
     <string name="request_sent">Solicitação enviada</string>
     <string name="ok">OK</string>
+    <string name="this_request_pending">Essa solicitação está pendente.</string>
+    <string name="this_request_completed">Essa solicitação foi concluída.</string>
 </resources>

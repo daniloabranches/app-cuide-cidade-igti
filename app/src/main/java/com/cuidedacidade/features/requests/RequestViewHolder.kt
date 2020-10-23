@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.requests
+package com.cuidedacidade.features.requests
 
 import android.content.Context
 import android.view.View
@@ -6,11 +6,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cuidedacidade.NavGraphDirections
 import com.cuidedacidade.R
+import com.cuidedacidade.core.image.ImageEngine
 import com.cuidedacidade.core.utils.DateUtils
 import com.cuidedacidade.core.view.OnClickDelayedListener
 import com.cuidedacidade.domain.entity.Request
-import com.cuidedacidade.feature.request.RequestBundle
-import com.cuidedacidade.core.image.ImageEngine
+import com.cuidedacidade.features.request.RequestBundle
 import kotlinx.android.synthetic.main.item_request.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +36,7 @@ class RequestViewHolder(view: View, private val imageEngine: ImageEngine) :
             request.categoryName,
             request.description,
             request.date,
+            request.completionDate,
             RequestBundle.Status.valueOf(request.status.value)
         )
         val action = NavGraphDirections.detailsRequestDetailsAction(requestBundle)
@@ -45,9 +46,9 @@ class RequestViewHolder(view: View, private val imageEngine: ImageEngine) :
     fun bind(request: Request) {
         this.request = request
         itemView.apply {
-            txt_category_request.text = request.categoryName
-            txt_description_request.text = request.description
-            txt_date_request.text = extractFormattedDate(context, request.date)
+            txt_request_category.text = request.categoryName
+            txt_request_description.text = request.description
+            txt_request_date.text = extractFormattedDate(context, request.date)
 
             img_status.visibility = when (request.status) {
                 Request.Status.EXECUTED -> View.VISIBLE

@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.request
+package com.cuidedacidade.features.request
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

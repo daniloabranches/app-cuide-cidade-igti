@@ -1,8 +1,8 @@
-package com.cuidedacidade.feature.requests.di
+package com.cuidedacidade.features.requests.di
 
 import androidx.lifecycle.ViewModel
 import com.cuidedacidade.di.ViewModelKey
-import com.cuidedacidade.feature.requests.RequestsViewModel
+import com.cuidedacidade.features.requests.RequestsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

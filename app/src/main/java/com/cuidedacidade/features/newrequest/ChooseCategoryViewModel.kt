@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.categories
+package com.cuidedacidade.features.newrequest
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.cuidedacidade.log.Log
 import com.cuidedacidade.core.task.SchedulerProvider
 import javax.inject.Inject
 
-class CategoriesViewModel @Inject constructor(
+class ChooseCategoryViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : BaseViewModel() {

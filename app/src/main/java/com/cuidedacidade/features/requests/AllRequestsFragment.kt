@@ -1,4 +1,4 @@
-package com.cuidedacidade.feature.requests
+package com.cuidedacidade.features.requests
 
 import android.os.Bundle
 import android.view.LayoutInflater

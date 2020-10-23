@@ -1,19 +1,20 @@
-package com.cuidedacidade.feature.request
+package com.cuidedacidade.features.newrequest
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cuidedacidade.core.BaseViewModel
 import com.cuidedacidade.core.network.Resource
+import com.cuidedacidade.core.task.SchedulerProvider
 import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.exception.ValidationException
 import com.cuidedacidade.domain.usecase.SaveRequestUseCase
+import com.cuidedacidade.features.request.CategoryBundle
 import com.cuidedacidade.log.Log
-import com.cuidedacidade.core.task.SchedulerProvider
 import com.cuidedacidade.security.Auth
 import java.util.*
 import javax.inject.Inject
 
-class RequestViewModel @Inject constructor(
+class NewRequestViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val saveRequestUseCase: SaveRequestUseCase
 ) : BaseViewModel() {
@@ -49,6 +50,7 @@ class RequestViewModel @Inject constructor(
             description,
             categoryBundle.image,
             Date(),
+            null,
             Request.Status.PENDING
         )
     }
