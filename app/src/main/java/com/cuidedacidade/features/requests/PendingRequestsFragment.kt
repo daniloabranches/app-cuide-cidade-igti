@@ -5,6 +5,8 @@ import android.view.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.cuidedacidade.R
+import com.cuidedacidade.utils.SnackbarUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_requests.*
 
 class PendingRequestsFragment : BaseRequestsFragment() {
@@ -19,8 +21,27 @@ class PendingRequestsFragment : BaseRequestsFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.mnuSignOut) {
+            signOut()
+            return true
+        }
         val navController = findNavController()
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+
+    private fun signOut() {
+        appAuthManager.signOut(requireActivity(), {
+            viewModel.refreshPendingRequests()
+            SnackbarUtils.show(
+                requireActivity().mainCoordinatorLayout,
+                R.string.you_signed_out_your_account
+            )
+        }, {
+            SnackbarUtils.show(
+                requireActivity().mainCoordinatorLayout,
+                R.string.something_unexpected_happened_try_again_later
+            )
+        })
     }
 
     override fun onCreateView(

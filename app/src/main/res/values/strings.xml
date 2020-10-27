@@ -15,6 +15,7 @@
     <string name="dec">dez</string>
 
     <string name="something_unexpected_happened_try_again_later">Ocorreu algo inesperado. Tente novamente mais tarde :(</string>
+    <string name="you_signed_out_your_account">Você saiu da sua conta</string>
     <string name="choose_category">Escolha uma categoria</string>
     <string name="pending_requests">Solicitações pendentes</string>
     <string name="today">Hoje</string>
@@ -30,10 +31,12 @@
     <string name="help_request_details">Descreva aqui sua solicitação</string>
     <string name="description">Descrição</string>
     <string name="send">Enviar</string>
+    <string name="exit">Sair</string>
     <string name="saving">Salvando…</string>
     <string name="something_unexpected_happened_we_will_try_again">Ocorreu algo inesperado. Tentaremos novamente.</string>
     <string name="request_sent">Solicitação enviada</string>
     <string name="ok">OK</string>
     <string name="this_request_pending">Essa solicitação está pendente.</string>
     <string name="this_request_completed">Essa solicitação foi concluída.</string>
+    <string name="you_need_login_continue">Você precisa logar para continuar</string>
 </resources>

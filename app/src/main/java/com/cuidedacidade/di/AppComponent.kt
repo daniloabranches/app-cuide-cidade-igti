@@ -1,6 +1,7 @@
 package com.cuidedacidade.di
 
 import android.content.Context
+import com.cuidedacidade.features.main.di.MainComponent
 import com.cuidedacidade.features.newrequest.di.ChooseCategoryComponent
 import com.cuidedacidade.features.newrequest.di.NewRequestComponent
 import com.cuidedacidade.features.requests.di.RequestsComponent
@@ -26,13 +27,15 @@ interface AppComponent {
     fun requestsComponent(): RequestsComponent.Factory
     fun requestComponent(): NewRequestComponent.Factory
     fun categoriesComponent(): ChooseCategoryComponent.Factory
+    fun mainComponent(): MainComponent.Factory
 }
 
 @Module(
     subcomponents = [
         RequestsComponent::class,
         ChooseCategoryComponent::class,
-        NewRequestComponent::class
+        NewRequestComponent::class,
+        MainComponent::class
     ]
 )
 object SubcomponentsModule

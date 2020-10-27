@@ -5,4 +5,8 @@
         android:id="@id/allRequestsAction"
         android:title="@string/all_requests"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuSignOut"
+        android:title="@string/exit"
+        app:showAsAction="never" />
 </menu>

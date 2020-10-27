@@ -3,6 +3,7 @@ package com.cuidedacidade.features.newrequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cuidedacidade.core.BaseViewModel
+import com.cuidedacidade.core.auth.AuthManager
 import com.cuidedacidade.core.network.Resource
 import com.cuidedacidade.core.task.SchedulerProvider
 import com.cuidedacidade.domain.entity.Request
@@ -10,19 +11,19 @@ import com.cuidedacidade.domain.exception.ValidationException
 import com.cuidedacidade.domain.usecase.SaveRequestUseCase
 import com.cuidedacidade.features.request.CategoryBundle
 import com.cuidedacidade.log.Log
-import com.cuidedacidade.security.Auth
 import java.util.*
 import javax.inject.Inject
 
 class NewRequestViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
-    private val saveRequestUseCase: SaveRequestUseCase
+    private val saveRequestUseCase: SaveRequestUseCase,
+    private val appAuthManager: AuthManager
 ) : BaseViewModel() {
     fun saveRequest(categoryBundle: CategoryBundle, description: String): LiveData<Resource<Unit>> {
         clearCompositeDisposable()
         val liveData = MutableLiveData<Resource<Unit>>()
         val request = createRequest(categoryBundle, description)
-        val subscriptionSaveRequestUseCase = saveRequestUseCase(Auth.USER, request)
+        val subscriptionSaveRequestUseCase = saveRequestUseCase(appAuthManager.getUserId(), request)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .subscribe(
