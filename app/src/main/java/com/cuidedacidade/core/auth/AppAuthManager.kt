@@ -10,8 +10,22 @@ const val REQUEST_CODE_SIGN_IN = 1
 
 class AppAuthManager @Inject constructor() : AuthManager {
     private val firebaseAuth = FirebaseAuth.getInstance()
+    private val authStateListeners = mutableListOf<AuthManager.AuthStateListener>()
+
+    private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+        authStateListeners.forEach {
+            it.onAuthStateChanged(firebaseAuth.currentUser != null)
+        }
+    }
+
+    init {
+        firebaseAuth.removeAuthStateListener(authStateListener)
+        firebaseAuth.addAuthStateListener(authStateListener)
+    }
 
     override fun isLoggedIn() = firebaseAuth.currentUser != null
+
+    override fun getUserId() = firebaseAuth.currentUser?.uid ?: ""
 
     override fun startSignIn(activity: FragmentActivity) =
         activity.startActivityForResult(
@@ -30,8 +44,6 @@ class AppAuthManager @Inject constructor() : AuthManager {
         }
     }
 
-    override fun getUserId() = firebaseAuth.currentUser?.uid ?: ""
-
     override fun signOut(activity: FragmentActivity, onSuccess: () -> Unit, onError: () -> Unit) {
         AuthUI.getInstance().signOut(activity)
             .addOnCompleteListener {
@@ -40,6 +52,15 @@ class AppAuthManager @Inject constructor() : AuthManager {
             .addOnFailureListener {
                 onError()
             }
+    }
+
+    override fun addAuthStateListener(authStateListener: AuthManager.AuthStateListener) {
+        authStateListeners.add(authStateListener)
+        authStateListener.onAuthStateChanged(firebaseAuth.currentUser != null)
+    }
+
+    override fun removeAuthStateListener(authStateListener: AuthManager.AuthStateListener) {
+        authStateListeners.remove(authStateListener)
     }
 
     private fun getAvailableProviders() = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())

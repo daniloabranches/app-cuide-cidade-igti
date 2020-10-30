@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.cuidedacidade.R
 import com.cuidedacidade.core.BaseFragment
 import com.cuidedacidade.core.CCidadeApplication
-import com.cuidedacidade.core.auth.AuthManager
 import com.cuidedacidade.core.image.ImageEngine
 import com.cuidedacidade.core.network.Resource
 import com.cuidedacidade.domain.entity.Request
@@ -22,8 +21,6 @@ import javax.inject.Inject
 abstract class BaseRequestsFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var appAuthManager: AuthManager
     protected val viewModel by viewModels<RequestsViewModel> { viewModelFactory }
 
     protected val observerRequests = Observer<Resource<List<Request>>> { requests ->

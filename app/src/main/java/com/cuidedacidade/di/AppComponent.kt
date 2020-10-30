@@ -28,6 +28,7 @@ interface AppComponent {
     fun requestComponent(): NewRequestComponent.Factory
     fun categoriesComponent(): ChooseCategoryComponent.Factory
     fun mainComponent(): MainComponent.Factory
+    fun baseFragmentComponent(): BaseFragmentComponent.Factory
 }
 
 @Module(
@@ -35,7 +36,8 @@ interface AppComponent {
         RequestsComponent::class,
         ChooseCategoryComponent::class,
         NewRequestComponent::class,
-        MainComponent::class
+        MainComponent::class,
+        BaseFragmentComponent::class
     ]
 )
 object SubcomponentsModule

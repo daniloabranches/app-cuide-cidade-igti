@@ -3,7 +3,7 @@ package com.cuidedacidade.features.main.di
 import com.cuidedacidade.features.main.MainActivity
 import dagger.Subcomponent
 
-@Subcomponent()
+@Subcomponent
 interface MainComponent {
     @Subcomponent.Factory
     interface Factory {

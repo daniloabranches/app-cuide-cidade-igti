@@ -25,6 +25,7 @@ abstract class AppModuleBinds {
     @Binds
     abstract fun bindCategoryRepository(categoryDataRepository: CategoryDataRepository): CategoryRepository
 
+    @Singleton
     @Binds
     abstract fun bindAuthManager(appAuthManager: AppAuthManager): AuthManager
 }

@@ -13,6 +13,12 @@
             app:argType="com.cuidedacidade.features.request.RequestBundle" />
     </action>
 
+    <action
+        android:id="@+id/redirectPendingRequestsAction"
+        app:destination="@id/PendingRequestsFragment"
+        app:popUpTo="@+id/PendingRequestsFragment"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/PendingRequestsFragment"
         android:name="com.cuidedacidade.features.requests.PendingRequestsFragment"
