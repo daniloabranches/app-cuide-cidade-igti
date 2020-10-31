@@ -5,6 +5,7 @@ import com.cuidedacidade.features.main.di.MainComponent
 import com.cuidedacidade.features.newrequest.di.ChooseCategoryComponent
 import com.cuidedacidade.features.newrequest.di.NewRequestComponent
 import com.cuidedacidade.features.requests.di.RequestsComponent
+import com.cuidedacidade.features.startup.di.StartupComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -28,7 +29,7 @@ interface AppComponent {
     fun requestComponent(): NewRequestComponent.Factory
     fun categoriesComponent(): ChooseCategoryComponent.Factory
     fun mainComponent(): MainComponent.Factory
-    fun baseFragmentComponent(): BaseFragmentComponent.Factory
+    fun startupComponent(): StartupComponent.Factory
 }
 
 @Module(
@@ -37,7 +38,7 @@ interface AppComponent {
         ChooseCategoryComponent::class,
         NewRequestComponent::class,
         MainComponent::class,
-        BaseFragmentComponent::class
+        StartupComponent::class
     ]
 )
 object SubcomponentsModule

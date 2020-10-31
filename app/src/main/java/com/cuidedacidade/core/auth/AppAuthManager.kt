@@ -1,8 +1,10 @@
 package com.cuidedacidade.core.auth
 
 import android.app.Activity
+import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
@@ -36,11 +38,18 @@ class AppAuthManager @Inject constructor() : AuthManager {
             REQUEST_CODE_SIGN_IN
         )
 
-    override fun handleSignInResult(resultCode: Int, onSuccess: () -> Unit, onError: () -> Unit) {
+    override fun handleSignInResult(
+        resultCode: Int,
+        data: Intent?,
+        onSuccess: () -> Unit,
+        onError: () -> Unit
+    ) {
         if (resultCode == Activity.RESULT_OK) {
             onSuccess()
         } else {
-            onError()
+            IdpResponse.fromResultIntent(data)?.run {
+                onError()
+            }
         }
     }
 
@@ -63,5 +72,8 @@ class AppAuthManager @Inject constructor() : AuthManager {
         authStateListeners.remove(authStateListener)
     }
 
-    private fun getAvailableProviders() = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
+    private fun getAvailableProviders() = arrayListOf(
+        AuthUI.IdpConfig.GoogleBuilder().build(),
+        AuthUI.IdpConfig.EmailBuilder().build()
+    )
 }

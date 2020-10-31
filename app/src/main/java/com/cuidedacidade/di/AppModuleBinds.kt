@@ -2,6 +2,8 @@ package com.cuidedacidade.di
 
 import com.cuidedacidade.core.auth.AppAuthManager
 import com.cuidedacidade.core.auth.AuthManager
+import com.cuidedacidade.core.router.AppRouter
+import com.cuidedacidade.core.router.Router
 import com.cuidedacidade.core.task.AppSchedulerProvider
 import com.cuidedacidade.core.task.SchedulerProvider
 import com.cuidedacidade.data.repository.CategoryDataRepository
@@ -28,4 +30,7 @@ abstract class AppModuleBinds {
     @Singleton
     @Binds
     abstract fun bindAuthManager(appAuthManager: AppAuthManager): AuthManager
+
+    @Binds
+    abstract fun bindRouter(appRouter: AppRouter): Router
 }

@@ -83,7 +83,8 @@ class NewRequestFragment : BaseFragment() {
     private fun onSuccessSaveRequest() {
         activity?.let {
             KeyboardUtils.hideKeyboard(it)
-            findNavController().navigate(R.id.finishNewRequestAction)
+            val action = NewRequestFragmentDirections.finishNewRequestAction()
+            findNavController().navigate(action)
             SnackbarUtils.show(it.mainCoordinatorLayout, R.string.request_sent)
         }
     }
@@ -102,7 +103,8 @@ class NewRequestFragment : BaseFragment() {
                 is ValidationException ->
                     AlertDialogUtils.showAlert(it, throwable.validationMessage)
                 else -> {
-                    findNavController().navigate(R.id.finishNewRequestAction)
+                    val action = NewRequestFragmentDirections.finishNewRequestAction()
+                    findNavController().navigate(action)
                     SnackbarUtils.show(
                         it.mainCoordinatorLayout,
                         R.string.something_unexpected_happened_we_will_try_again
