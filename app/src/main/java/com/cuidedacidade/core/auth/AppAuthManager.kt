@@ -2,6 +2,7 @@ package com.cuidedacidade.core.auth
 
 import android.app.Activity
 import android.content.Intent
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -10,7 +11,7 @@ import javax.inject.Inject
 
 const val REQUEST_CODE_SIGN_IN = 1
 
-class AppAuthManager @Inject constructor() : AuthManager {
+class AppAuthManager @Inject constructor(@DrawableRes private val logo: Int) : AuthManager {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val authStateListeners = mutableListOf<AuthManager.AuthStateListener>()
 
@@ -34,6 +35,9 @@ class AppAuthManager @Inject constructor() : AuthManager {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(getAvailableProviders())
+                .setLogo(logo)
+                .setAlwaysShowSignInMethodScreen(true)
+                .setIsSmartLockEnabled(false)
                 .build(),
             REQUEST_CODE_SIGN_IN
         )
