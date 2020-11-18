@@ -1,4 +1,4 @@
-package com.cuidedacidade.features.requests
+package com.cuidedacidade.features.baserequests
 
 import android.content.Context
 import android.view.View

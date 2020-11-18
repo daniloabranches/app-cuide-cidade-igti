@@ -1,10 +1,11 @@
 package com.cuidedacidade.di
 
 import android.content.Context
+import com.cuidedacidade.features.allrequests.di.AllRequestsComponent
 import com.cuidedacidade.features.main.di.MainComponent
 import com.cuidedacidade.features.newrequest.di.ChooseCategoryComponent
 import com.cuidedacidade.features.newrequest.di.NewRequestComponent
-import com.cuidedacidade.features.requests.di.RequestsComponent
+import com.cuidedacidade.features.pendingrequests.di.PendingRequestsComponent
 import com.cuidedacidade.features.startup.di.StartupComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -26,7 +27,8 @@ interface AppComponent {
         fun create(@BindsInstance applicationContext: Context): AppComponent
     }
 
-    fun requestsComponent(): RequestsComponent.Factory
+    fun allRequestsComponent(): AllRequestsComponent.Factory
+    fun pendingRequestsComponent(): PendingRequestsComponent.Factory
     fun requestComponent(): NewRequestComponent.Factory
     fun categoriesComponent(): ChooseCategoryComponent.Factory
     fun mainComponent(): MainComponent.Factory
@@ -35,7 +37,8 @@ interface AppComponent {
 
 @Module(
     subcomponents = [
-        RequestsComponent::class,
+        AllRequestsComponent::class,
+        PendingRequestsComponent::class,
         ChooseCategoryComponent::class,
         NewRequestComponent::class,
         MainComponent::class,

@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/PendingRequestsFragment"
-        android:name="com.cuidedacidade.features.requests.PendingRequestsFragment"
+        android:name="com.cuidedacidade.features.pendingrequests.PendingRequestsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_requests">
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/AllRequestsFragment"
-        android:name="com.cuidedacidade.features.requests.AllRequestsFragment"
+        android:name="com.cuidedacidade.features.allrequests.AllRequestsFragment"
         android:label="@string/requests"
         tools:layout="@layout/fragment_requests">
         <action

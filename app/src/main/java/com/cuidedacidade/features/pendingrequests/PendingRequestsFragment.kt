@@ -1,15 +1,33 @@
-package com.cuidedacidade.features.requests
+package com.cuidedacidade.features.pendingrequests
 
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.cuidedacidade.R
+import com.cuidedacidade.core.CCidadeApplication
+import com.cuidedacidade.core.auth.AuthManager
+import com.cuidedacidade.features.baserequests.BaseRequestsFragment
 import com.cuidedacidade.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_requests.*
+import javax.inject.Inject
 
 class PendingRequestsFragment : BaseRequestsFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<PendingRequestsViewModel> { viewModelFactory }
+
+    @Inject
+    lateinit var appAuthManager: AuthManager
+
+    override fun setupDI() {
+        (requireActivity().application as CCidadeApplication).appComponent
+            .pendingRequestsComponent().create().inject(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
