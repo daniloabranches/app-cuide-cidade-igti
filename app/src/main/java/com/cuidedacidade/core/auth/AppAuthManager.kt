@@ -78,6 +78,7 @@ class AppAuthManager @Inject constructor(@DrawableRes private val logo: Int) : A
 
     private fun getAvailableProviders() = arrayListOf(
         AuthUI.IdpConfig.GoogleBuilder().build(),
+        AuthUI.IdpConfig.TwitterBuilder().build(),
         AuthUI.IdpConfig.EmailBuilder().build()
     )
 }

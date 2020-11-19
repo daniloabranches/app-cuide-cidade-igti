@@ -11,5 +11,5 @@ import javax.inject.Singleton
 class AppModuleProvides {
     @Singleton
     @Provides
-    fun bindAuthManager(): AuthManager = AppAuthManager(R.mipmap.ic_launcher)
+    fun bindAuthManager(): AuthManager = AppAuthManager(R.drawable.logo)
 }
