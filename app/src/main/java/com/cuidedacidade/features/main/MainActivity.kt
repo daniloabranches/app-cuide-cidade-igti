@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.PendingRequestsFragment, R.id.AllRequestsFragment -> fab.show()
                 else -> fab.hide()
             }
+            when (destination.id) {
+                R.id.StartupFragment -> supportActionBar?.hide()
+                else -> supportActionBar?.show()
+            }
         }
     }
 

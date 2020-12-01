@@ -39,5 +39,6 @@
     <string name="this_request_pending">Essa solicitação está pendente.</string>
     <string name="this_request_completed">Essa solicitação foi concluída.</string>
     <string name="you_need_login_continue">Você precisa logar para continuar</string>
-    <string name="start">Começar</string>
+    <string name="start">Vamos lá!</string>
+    <string name="startup_message">Ajude a tornar sua cidade um lugar melhor para as pessoas</string>
 </resources>

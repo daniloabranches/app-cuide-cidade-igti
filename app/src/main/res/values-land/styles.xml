@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ImageViewStartup">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:alpha">0.3</item>
+    </style>
+
+</resources>
