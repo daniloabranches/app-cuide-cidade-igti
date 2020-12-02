@@ -2,12 +2,12 @@ package com.cuidedacidade.features.main
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.cuidedacidade.NavGraphDirections
 import com.cuidedacidade.R
+import com.cuidedacidade.core.BaseActivity
 import com.cuidedacidade.core.CCidadeApplication
 import com.cuidedacidade.core.auth.AuthManager
 import com.cuidedacidade.core.auth.REQUEST_CODE_SIGN_IN
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     @Inject
     lateinit var appAuthManager: AuthManager
 
@@ -37,10 +37,12 @@ class MainActivity : AppCompatActivity() {
             isLoggedIn = stateIsLogged
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun setupDI() {
         (application as CCidadeApplication).appComponent
             .mainComponent().create().inject(this)
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))

@@ -41,4 +41,6 @@
     <string name="you_need_login_continue">Você precisa logar para continuar</string>
     <string name="start">Vamos lá!</string>
     <string name="startup_message">Ajude a tornar sua cidade um lugar melhor para as pessoas</string>
+    <string name="take_picture">Tirar foto</string>
+    <string name="you_dont_have_camera_app">Você não possui um aplicativo de câmera</string>
 </resources>

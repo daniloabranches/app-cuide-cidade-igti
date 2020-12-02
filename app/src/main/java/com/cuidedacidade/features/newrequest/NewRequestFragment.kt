@@ -1,5 +1,7 @@
 package com.cuidedacidade.features.newrequest
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
@@ -10,14 +12,18 @@ import androidx.navigation.fragment.navArgs
 import com.cuidedacidade.R
 import com.cuidedacidade.core.BaseFragment
 import com.cuidedacidade.core.CCidadeApplication
+import com.cuidedacidade.core.extensions.setVisible
 import com.cuidedacidade.core.network.Resource
 import com.cuidedacidade.core.utils.KeyboardUtils
 import com.cuidedacidade.domain.exception.ValidationException
 import com.cuidedacidade.utils.AlertDialogUtils
+import com.cuidedacidade.utils.CameraUtils
 import com.cuidedacidade.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_new_request.*
 import javax.inject.Inject
+
+const val REQUEST_IMAGE_CAPTURE = 90
 
 class NewRequestFragment : BaseFragment() {
     @Inject
@@ -70,6 +76,22 @@ class NewRequestFragment : BaseFragment() {
             txt_request_description.hint = getString(
                 if (hasFocus) R.string.description else R.string.help_request_details
             )
+        }
+        btnCamera.setVisible(CameraUtils.hasCamera(requireContext()))
+        btnCamera.setOnClickListener {
+            CameraUtils.dispatchTakePicture(this, REQUEST_IMAGE_CAPTURE) {
+                SnackbarUtils.show(
+                    requireActivity().mainCoordinatorLayout,
+                    R.string.you_dont_have_camera_app
+                )
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
         }
     }
 
