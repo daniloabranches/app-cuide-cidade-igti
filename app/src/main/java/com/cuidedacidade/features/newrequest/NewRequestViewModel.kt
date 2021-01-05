@@ -19,26 +19,28 @@ class NewRequestViewModel @Inject constructor(
     private val saveRequestUseCase: SaveRequestUseCase,
     private val appAuthManager: AuthManager
 ) : BaseViewModel() {
-    fun saveRequest(categoryBundle: CategoryBundle, description: String): LiveData<Resource<Unit>> {
+    fun saveRequest(categoryBundle: CategoryBundle, description: String, photoPath: String?):
+            LiveData<Resource<Unit>> {
         clearCompositeDisposable()
         val liveData = MutableLiveData<Resource<Unit>>()
         val request = createRequest(categoryBundle, description)
-        val subscriptionSaveRequestUseCase = saveRequestUseCase(appAuthManager.getUserId(), request)
-            .subscribeOn(schedulerProvider.io())
-            .observeOn(schedulerProvider.ui())
-            .subscribe(
-                {
-                    liveData.value = Resource.Loading()
-                },
-                {
-                    if (it !is ValidationException) {
-                        Log.exception(it)
-                    }
-                    liveData.value = Resource.Error(null, it)
-                },
-                {
-                    liveData.value = Resource.Success(Unit)
-                })
+        val subscriptionSaveRequestUseCase =
+            saveRequestUseCase(appAuthManager.getUserId(), request, photoPath)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(
+                    {
+                        liveData.value = Resource.Loading()
+                    },
+                    {
+                        if (it !is ValidationException) {
+                            Log.exception(it)
+                        }
+                        liveData.value = Resource.Error(null, it)
+                    },
+                    {
+                        liveData.value = Resource.Success(Unit)
+                    })
         addInCompositeDisposable(subscriptionSaveRequestUseCase)
         return liveData
     }

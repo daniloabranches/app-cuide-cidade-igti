@@ -30,6 +30,8 @@ class NewRequestFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<NewRequestViewModel> { viewModelFactory }
     private val args: NewRequestFragmentArgs by navArgs()
+    private var photoPath: String? = null
+    private var tempPhotoPath: String? = null
 
     override fun setupDI() {
         (requireActivity().application as CCidadeApplication).appComponent
@@ -79,7 +81,7 @@ class NewRequestFragment : BaseFragment() {
         }
         btnCamera.setVisible(CameraUtils.hasCamera(requireContext()))
         btnCamera.setOnClickListener {
-            CameraUtils.dispatchTakePicture(this, REQUEST_IMAGE_CAPTURE) {
+            tempPhotoPath = CameraUtils.dispatchTakePicture(this, REQUEST_IMAGE_CAPTURE) {
                 SnackbarUtils.show(
                     requireActivity().mainCoordinatorLayout,
                     R.string.you_dont_have_camera_app
@@ -91,14 +93,15 @@ class NewRequestFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
+            photoPath = tempPhotoPath
         }
     }
 
     private fun saveRequest() {
         viewModel.saveRequest(
             args.category,
-            txt_request_description.editText!!.text.toString()
+            txt_request_description.editText!!.text.toString(),
+            photoPath
         ).observe(viewLifecycleOwner, saveRequestObserver)
     }
 

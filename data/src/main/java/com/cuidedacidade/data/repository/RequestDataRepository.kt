@@ -4,6 +4,7 @@ import com.cuidedacidade.data.entity.RequestEntity
 import com.cuidedacidade.data.exception.FirebaseUnspecifiedException
 import com.cuidedacidade.data.extensions.addSync
 import com.cuidedacidade.data.extensions.getSync
+import com.cuidedacidade.data.extensions.putStreamSync
 import com.cuidedacidade.data.extensions.toObjectsWithId
 import com.cuidedacidade.data.mapper.RequestEntityDataMapper
 import com.cuidedacidade.data.repository.collections.RequestsCollection
@@ -12,6 +13,8 @@ import com.cuidedacidade.domain.entity.Request
 import com.cuidedacidade.domain.repository.RequestRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.io.File
+import java.io.FileInputStream
 import javax.inject.Inject
 
 class RequestDataRepository @Inject constructor(
@@ -47,12 +50,22 @@ class RequestDataRepository @Inject constructor(
         }
     }
 
-    override fun saveRequest(userId: String, request: Request): Completable {
+    override fun saveRequest(userId: String, request: Request, photoPath: String?): Completable {
         return Completable.fromCallable {
             val data = getHashMap(request)
             getRequestsCollection(userId).addSync(data).let { task ->
                 if (!task.isSuccessful || task.result == null) {
                     throw task.exception ?: FirebaseUnspecifiedException()
+                }
+            }
+
+            photoPath?.run {
+                val photo = File(photoPath)
+                val stream = FileInputStream(photo)
+                getUsersStorageReference(userId, photo.name).putStreamSync(stream).let { task ->
+                    if (!task.isSuccessful) {
+                        throw task.exception ?: FirebaseUnspecifiedException()
+                    }
                 }
             }
         }
@@ -70,4 +83,7 @@ class RequestDataRepository @Inject constructor(
     private fun getRequestsCollection(userId: String) =
         db.collection(UsersCollection.name).document(userId)
             .collection(RequestsCollection.name)
+
+    private fun getUsersStorageReference(userId: String, imageName: String) =
+        storage.child("${UsersCollection.name}/${userId}/${imageName}")
 }

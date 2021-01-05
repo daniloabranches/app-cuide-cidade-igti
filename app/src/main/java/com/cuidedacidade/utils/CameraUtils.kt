@@ -3,7 +3,6 @@ package com.cuidedacidade.utils
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
@@ -17,7 +16,7 @@ object CameraUtils {
     fun hasCamera(context: Context) =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)
 
-    fun dispatchTakePicture(fragment: Fragment, requestCode: Int, onError: () -> Unit): Uri? {
+    fun dispatchTakePicture(fragment: Fragment, requestCode: Int, onError: () -> Unit): String? {
         val context = fragment.requireContext()
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
@@ -46,7 +45,7 @@ object CameraUtils {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
         fragment.startActivityForResult(intent, requestCode)
 
-        return photoURI
+        return photoFile.absolutePath
     }
 
     private fun createImageFile(context: Context): File {

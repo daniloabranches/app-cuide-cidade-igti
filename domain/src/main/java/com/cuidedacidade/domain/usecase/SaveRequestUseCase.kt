@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SaveRequestUseCase @Inject constructor(
     private val requestRepository: RequestRepository
 ) {
-    operator fun invoke(userId: String, request: Request): Observable<Unit> {
+    operator fun invoke(userId: String, request: Request, photoPath: String?): Observable<Unit> {
         return Observable.create<Unit> {
             if (request.categoryName.isBlank()) {
                 throw ValidationException("Informe a categoria para a solicitação")
@@ -22,6 +22,6 @@ class SaveRequestUseCase @Inject constructor(
             }
             it.onNext(Unit)
             it.onComplete()
-        }.concatWith(requestRepository.saveRequest(userId, request))
+        }.concatWith(requestRepository.saveRequest(userId, request, photoPath))
     }
 }

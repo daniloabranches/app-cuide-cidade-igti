@@ -22,9 +22,4 @@ object ImageEngine {
             Glide.with(imageView).load(it).into(imageView)
         }
     }
-
-    fun getUsersStorageReference(userId: String, imageName: String) =
-        getAppStorageReference().run {
-            child("users/${userId}/${imageName}")
-        }
 }
