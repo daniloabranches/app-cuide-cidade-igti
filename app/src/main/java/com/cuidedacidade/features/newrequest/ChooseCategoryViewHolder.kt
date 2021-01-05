@@ -39,7 +39,7 @@ class ChooseCategoryViewHolder(
         this.category = category
         itemView.apply {
             txt_title_category.text = category.title
-            imageEngine.getCategoryImage(category.image, img_category)
+            imageEngine.loadCategoryImage(category.image, img_category)
         }
     }
 }

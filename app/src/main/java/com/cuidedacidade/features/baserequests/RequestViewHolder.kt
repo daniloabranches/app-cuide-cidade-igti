@@ -55,7 +55,7 @@ class RequestViewHolder(view: View, private val imageEngine: ImageEngine) :
                 else -> View.GONE
             }
 
-            imageEngine.getCategoryImage(request.image, img_request)
+            imageEngine.loadCategoryImage(request.image, img_request)
         }
     }
 
