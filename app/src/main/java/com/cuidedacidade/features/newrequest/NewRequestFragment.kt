@@ -19,8 +19,10 @@ import com.cuidedacidade.domain.exception.ValidationException
 import com.cuidedacidade.utils.AlertDialogUtils
 import com.cuidedacidade.utils.CameraUtils
 import com.cuidedacidade.utils.SnackbarUtils
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_new_request.*
+import java.io.File
 import javax.inject.Inject
 
 const val REQUEST_IMAGE_CAPTURE = 90
@@ -88,12 +90,19 @@ class NewRequestFragment : BaseFragment() {
                 )
             }
         }
+        txt_photo_name.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             photoPath = tempPhotoPath
+            photoPath?.let {
+                txt_photo_name.text = File(it).name
+                txt_photo_name.visibility = View.VISIBLE
+            } ?: run {
+                txt_photo_name.visibility = View.GONE
+            }
         }
     }
 
@@ -117,7 +126,11 @@ class NewRequestFragment : BaseFragment() {
     private fun onLoadingSaveRequest() {
         activity?.let {
             KeyboardUtils.hideKeyboard(it)
-            SnackbarUtils.show(it.mainCoordinatorLayout, R.string.saving)
+            SnackbarUtils.show(
+                it.mainCoordinatorLayout,
+                R.string.saving,
+                Snackbar.LENGTH_INDEFINITE
+            )
         }
     }
 
