@@ -6,7 +6,25 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
     implementation 'com.google.dagger:dagger:2.29.1'
+
+    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation "org.mockito:mockito-core:3.7.7"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.7.7"
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
