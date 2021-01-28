@@ -11,6 +11,9 @@ class SaveRequestUseCase @Inject constructor(
 ) {
     operator fun invoke(userId: String, request: Request, photoPath: String?): Observable<Unit> {
         return Observable.create<Unit> {
+            if (userId.isBlank()) {
+                throw ValidationException("Informe o usuário")
+            }
             if (request.categoryName.isBlank()) {
                 throw ValidationException("Informe a categoria para a solicitação")
             }
