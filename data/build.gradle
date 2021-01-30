@@ -21,6 +21,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -36,7 +46,10 @@ dependencies {
 
     implementation project(path: ':domain')
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation "org.mockito:mockito-core:3.7.7"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.7.7"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
